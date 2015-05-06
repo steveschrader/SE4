@@ -2,7 +2,9 @@ package be.odisee.pajotter.service;
 
 import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.dao.*;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.*;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.*;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly=true)
 public class PajottersSessieServiceImpl implements PajottersSessieService {
 
+	//Telers MOET NOG AANGEPAST WORDEN!!!
     private TelerDao telerDao;
 
     public PajottersSessieServiceImpl(){}
@@ -24,6 +27,8 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
     public Teler voegTelerToe(String voornaam, String familienaam, String emailadres, String paswoord)
     {
+    	//String status, String usernaam, Partij partij, String adres, String telefoon
+    	
         return telerDao.saveTeler("actief", voornaam, familienaam, emailadres, paswoord);
     }
 
@@ -54,5 +59,37 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
     {
         return telerDao.getAllTelers();
     }
+
+    //PARTIJEN !!!
+	@Override
+	public Partij voegPartijToe(String voornaam, String familienaam,
+			String emailadres, String paswoord) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Partij zoekPartijMetId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void verwijderPartij(int partijid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePartij(Partij partijid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Partij> geefAllePartijen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

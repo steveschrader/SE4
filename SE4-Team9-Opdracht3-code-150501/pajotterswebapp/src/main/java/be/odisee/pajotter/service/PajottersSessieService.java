@@ -4,7 +4,7 @@ import be.odisee.pajotter.domain.*;
 import java.util.List;
 
 public interface PajottersSessieService {
-
+//Telers, MOET NOG AANGEPAST WORDEN
     public Teler voegTelerToe(String voornaam, String familienaam, String emailadres, String paswoord);
     public Teler voegTelerToe(String voornaam, String familienaam, String emailadres, String paswoord, String adres, String telefoon);
 
@@ -15,5 +15,18 @@ public interface PajottersSessieService {
     public void updateTeler(Teler telerid);
 
     public List<Teler> geefAlleTelers();
+    
+    
+    //partijen
+    public Partij voegPartijToe(String voornaam, String familienaam, String emailadres, String paswoord);
+   // public Teler voegTelerToe(String voornaam, String familienaam, String emailadres, String paswoord, String adres, String telefoon);
+
+    public Partij zoekPartijMetId(int id);
+    
+    public void verwijderPartij(int partijid);
+    
+    public void updatePartij(Partij partijid);
+
+    public List<Partij> geefAllePartijen();
 
 }
