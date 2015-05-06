@@ -1,14 +1,18 @@
 package be.odisee.pajotter.controller;
 
+
 import be.odisee.pajotter.domain.Partij;
 //import be.odisee.pajotter.domain.Teler;
 import be.odisee.pajotter.service.PajottersSessieService;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -66,7 +70,9 @@ public class PartijController {
     // nieuwe teler te maken
 
     @RequestMapping(value={"/nieuwePartij.html"},method=RequestMethod.POST)
-    public String partijToevoegen(@ModelAttribute("departij") Partij partij, ModelMap model){
+    public String partijToevoegen(@ModelAttribute("departij") @Valid Partij partij,
+            BindingResult result, ModelMap model){
+    	if (result.hasErrors()) return "/nieuwePartij"; 
         Partij toegevoegdPartij = pajottersSessieService.voegPartijToe(partij.getVoornaam(), partij.getFamilienaam(), partij.getEmailadres(), partij.getPaswoord());
 
         System.out.println("DEBUG partijgegevens familienaam: " + partij.getFamilienaam());

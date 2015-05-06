@@ -16,14 +16,14 @@
 		<div id="MiddenPaneel">
 			<div id="Inhoud">
 				<ul>
-		            <c:forEach items="${telers}" var="teler">
-		                <c:url var="telerUrl" value="/teler.html">
-		                    <c:param name="id" value="${teler.id}" />
+		            <c:forEach items="${partijen}" var="partij">
+		                <c:url var="partijUrl" value="/partij.html">
+		                    <c:param name="id" value="${partij.id}" />
 		                </c:url>
 		                <li>
-		                    <a href='<c:out value="${telerUrl}"/>'>
-		                        <c:out value="${teler.voornaam}" />
-		                        <c:out value="${teler.familienaam}" />
+		                    <a href='<c:out value="${partijUrl}"/>'>
+		                        <c:out value="${partij.voornaam}" />
+		                        <c:out value="${partij.familienaam}" />
 		                    </a>
 		                </li>
 		            </c:forEach>

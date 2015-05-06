@@ -5,8 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.Index;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.utilities.RolNotFoundException;
@@ -27,20 +30,24 @@ public class Partij implements Serializable{
 
     @Column
     @Index(name = "IPartij_naam", columnNames = "familienaam, voornaam")
+    @NotEmpty(message="Vul voornaam in aub")
     private String voornaam;
 
     @Column
+    @NotEmpty(message="Vul achternaam in aub")
     private String familienaam;
 
     @Column
     @Index(name = "IPartij_email", columnNames = "emailadres")
+    @Pattern(regexp=".+@.+\\..+", message="Email is niet correct")
     private String emailadres;
 
     @Column
+    @Length(min=8, max=80, message="Wachtwoord moet tussen 8 en 80 karakters lang zijn")
     private String paswoord;
     
     
-    
+    //DIT Geeft Problemen !!!
     @OneToMany(fetch=FetchType.EAGER,mappedBy="partij")
     private Set<Rol> m_Rollen= new HashSet<Rol>();
     
