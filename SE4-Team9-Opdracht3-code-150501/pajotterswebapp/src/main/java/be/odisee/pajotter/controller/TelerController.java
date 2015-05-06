@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/")
 public class TelerController {
+	//Dit is nu de partij controller geworden
 
-    @Autowired
+  /*  @Autowired
     protected PajottersSessieService brainstormSessieService=null; // ready for dependency injection
     //lijst van alle telers
     @RequestMapping(value={"/home.html","/index.html","/lijst.html"}, method = RequestMethod.GET)
@@ -20,10 +21,10 @@ public class TelerController {
         List<Teler> deLijst = brainstormSessieService.geefAlleTelers();
         model.addAttribute("telers", deLijst);
         return "/index";
-    }
+    }*/
     // details van de teler
 
-    @RequestMapping(value={"/teler.html"}, method = RequestMethod.GET)
+   /* @RequestMapping(value={"/teler.html"}, method = RequestMethod.GET)
     public String telerDetail(@RequestParam("id") Integer id, ModelMap model){
         Teler teler = brainstormSessieService.zoekTelerMetId(id);
         model.addAttribute("teler", teler);
@@ -75,7 +76,7 @@ public class TelerController {
         return "redirect:teler.html?id=" + toegevoegdTeler.getId();
     }
     
-    /*@RequestMapping(value={"/jquery.js"},method=RequestMethod.GET)
+    @RequestMapping(value={"/jquery.js"},method=RequestMethod.GET)
     public String geefjQuery() {
     	return "/jquery-2.1.3.min.js";
     }

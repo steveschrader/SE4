@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.*;
 
-@Service("brainstormSessieService")
+@Service("pajottersSessieService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly=true)
 public class PajottersSessieServiceImpl implements PajottersSessieService {
 
 	//Telers MOET NOG AANGEPAST WORDEN!!!
-    private TelerDao telerDao;
+   /* private TelerDao telerDao;
 
     public PajottersSessieServiceImpl(){}
 
@@ -25,18 +25,14 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
     }
 
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-    public Teler voegTelerToe(String voornaam, String familienaam, String emailadres, String paswoord)
+    public Teler voegTelerToe(String username, Partij partij, String adres, String telefoon)
     {
     	//String status, String usernaam, Partij partij, String adres, String telefoon
     	
-        return telerDao.saveTeler("actief", voornaam, familienaam, emailadres, paswoord);
+        return telerDao.saveTeler("actief", username, partij, adres, telefoon);
     }
 
-    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-    public Teler voegTelerToe(String voornaam, String familienaam, String emailadres, String paswoord, String adres, String telefoon)
-    {
-        return telerDao.saveTeler("actief", voornaam, familienaam, emailadres, paswoord, adres, telefoon);
-    }
+	
     
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
     public Teler zoekTelerMetId(int id)
@@ -58,7 +54,7 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
     public List<Teler> geefAlleTelers()
     {
         return telerDao.getAllTelers();
-    }
+    }*/
 
     //PARTIJEN !!!
 	@Override
@@ -91,5 +87,7 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

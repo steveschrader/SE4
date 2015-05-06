@@ -1,4 +1,4 @@
-package be.odisee.pajotter.domain;
+ package be.odisee.pajotter.domain;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -8,22 +8,21 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.Index;
 
-
 import be.odisee.pajotter.domain.*;
 
 @Entity
-@Table(name = "telers")
+@DiscriminatorValue("Teler")
 public class Teler extends Rol {
 
 	@Override
 	public String getType() {
 		return "Teler";
 	}
-	@Column
-	private String adres;
+	//@Column
+	//private String adres;
 	
-	@Column
-	private String telefoon;
+	//@Column
+	//private String telefoon;
 	
     public Teler(){}
     
@@ -32,35 +31,15 @@ public class Teler extends Rol {
        
     }
 
-    public Teler(String status, String usernaam, Partij partij, String adres, String telefoon){
-        super(status,usernaam, partij);
-        this.adres = adres;
-        this.telefoon = telefoon;
-    }
-
-    public Teler(int id, String status, String usernaam, Partij partij, String adres, String telefoon){
+    
+    public Teler(int id, String status, String usernaam, Partij partij){
         super(id,status,usernaam,partij);
-        this.adres = adres;
-        this.telefoon = telefoon;
+        //this.adres = adres;
+        //this.telefoon = telefoon;
     }
 	
 	
-	public String getAdres() {
-		return adres;
-	}
-
-	public void setAdres(String adres) {
-		this.adres = adres;
-	}
-
-	public String getTelefoon() {
-		return telefoon;
-	}
-
-	public void setTelefoon(String telefoon) {
-		this.telefoon = telefoon;
-	}
-
+	
     
 
 	/*private static final long serialVersionUID = 1L;
