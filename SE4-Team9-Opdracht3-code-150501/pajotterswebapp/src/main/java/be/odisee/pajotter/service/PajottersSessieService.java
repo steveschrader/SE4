@@ -18,6 +18,7 @@ public interface PajottersSessieService {
     
     
     //partijen
+    public Partij voegPartijToe(String voornaam, String familienaam, String emailadres, String paswoord, String rol);
     public Partij voegPartijToe(String voornaam, String familienaam, String emailadres, String paswoord);
    // public Teler voegTelerToe(String voornaam, String familienaam, String emailadres, String paswoord, String adres, String telefoon);
 

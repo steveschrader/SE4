@@ -6,12 +6,56 @@ import be.odisee.pajotter.dao.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.*;
 
 @Service("pajottersSessieService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly=true)
 public class PajottersSessieServiceImpl implements PajottersSessieService {
+	private PartijDao partijDao;
+	
+	public PajottersSessieServiceImpl(){}
+
+    @Autowired
+    public void setPartijDao(PartijDao partijDao)
+    {
+        this.partijDao = partijDao;
+    }
+    
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public Partij voegPartijToe(String voornaam, String familienaam,
+			String emailadres, String paswoord) {
+		return partijDao.savePartij("actief", voornaam, familienaam, emailadres, paswoord);	
+	}
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public Partij voegPartijToe(String voornaam, String familienaam,
+			String emailadres, String paswoord, String rol) {
+		return partijDao.savePartij("actief", voornaam, familienaam, emailadres, paswoord, rol);	
+	}
+
+
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public Partij zoekPartijMetId(int id) {
+		 return partijDao.getPartijById(id);
+	}
+
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void verwijderPartij(int partijid) {
+		partijDao.deletePartij(partijid);
+		
+	}
+
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void updatePartij(Partij partijid) {
+		partijDao.updatePartij(partijid);
+		
+	}
+
+    //@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public List<Partij> geefAllePartijen() {
+		return partijDao.getAllPartijen();
+	}
 
 	//Telers MOET NOG AANGEPAST WORDEN!!!
    /* private TelerDao telerDao;
@@ -57,37 +101,5 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
     }*/
 
     //PARTIJEN !!!
-	@Override
-	public Partij voegPartijToe(String voornaam, String familienaam,
-			String emailadres, String paswoord) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Partij zoekPartijMetId(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void verwijderPartij(int partijid) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updatePartij(Partij partijid) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<Partij> geefAllePartijen() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
-
 }
