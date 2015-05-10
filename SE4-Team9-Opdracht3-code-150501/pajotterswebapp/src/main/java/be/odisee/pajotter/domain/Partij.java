@@ -47,7 +47,7 @@ public class Partij implements Serializable{
     private String paswoord;
     
     
-    //DIT Geeft Problemen !!!
+    
     @OneToMany(fetch=FetchType.EAGER,mappedBy="partij")
     private Set<Rol> m_Rollen= new HashSet<Rol>();
     

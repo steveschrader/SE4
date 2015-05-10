@@ -10,7 +10,7 @@
     <body>
     	<div id="BovenPaneel">
 			<div id="Titel">
-				<h1>Lijst van Telers</h1>
+				<h1>Lijst van Partijen</h1>
 			</div>
 		</div>
 		<div id="MiddenPaneel">
@@ -24,14 +24,15 @@
 		                    <a href='<c:out value="${partijUrl}"/>'>
 		                        <c:out value="${partij.voornaam}" />
 		                        <c:out value="${partij.familienaam}" />
+		                        <c:out value="${partij.id}" />
 		                    </a>
 		                </li>
 		            </c:forEach>
 		        </ul>
-		        <c:url var="nieuweTelerUrl" value="/nieuweTeler.html" />
+		        <c:url var="nieuwePartijUrl" value="/nieuwePartij.html" />
 		        
 		        <div class="knoppenpaneel">
-		        	<a class="knop" href='<c:out value="${nieuweTelerUrl}"/>'>Teler Toevoegen</a>
+		        	<a class="knop" href='<c:out value="${nieuwePartijUrl}"/>'>Partij Toevoegen</a>
 		        </div>
 			</div>
 		</div>

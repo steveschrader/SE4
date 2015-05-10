@@ -18,14 +18,14 @@
 	<body>
 		<div id="BovenPaneel">
 			<div id="Titel">
-				<h1>Teler bewerken</h1>
+				<h1>Partij bewerken</h1>
 			</div>
 		</div>
 		<div id="MiddenPaneel">
 			<div id="Inhoud">
 				<p>Bewerk de onderstaande velden naar believen en klik op opslaan.
-				<c:url var="url" value="/updateTeler.html" />
-				<form:form method="POST" commandName="deteler" action="${url}">
+				<c:url var="url" value="/updatePartij.html" />
+				<form:form method="POST" commandName="departij" action="${url}">
 					<table>
 						<tbody>
 							<tr>
@@ -35,27 +35,24 @@
 							<tr>
 								<td><label for="vnaam">Naam:</label></td>
 								<td><form:input id="vnaam" path="voornaam" /></td>
+								<td><font color="red"><form:errors path="voornaam" /></font></td>
 							</tr>
 							<tr>
 								<td><label for="fnaam">Familienaam:</label></td>
 								<td><form:input id="fnaam" path="familienaam" /></td>
+								<td><font color="red"><form:errors path="familienaam" /></font></td>
 							</tr>
 							
 							<tr>
 								<td><label for="email">Emailadres:</label></td>
 								<td><form:input id="email" path="emailadres" /></td>
+								<td><font color="red"><form:errors path="emailadres" /></font></td>
 							</tr>
-							<tr>
-								<td><label for="adres">Adres:</label></td>
-								<td><form:input id="adres" path="adres"/></td>
-							</tr>
-							<tr>
-								<td><label for="telefoon">Telefoon:</label></td>
-								<td><form:input id="telefoon" path="telefoon" /></td>
-							</tr>
+							
 							<tr>
 								<td><label for="pwoord">Paswoord:</label></td>
 								<td><form:input id="pwoord" path="paswoord" /></td>
+								<td><font color="red"><form:errors path="paswoord" /></font></td>
 							</tr>
 						</tbody>
 					</table>

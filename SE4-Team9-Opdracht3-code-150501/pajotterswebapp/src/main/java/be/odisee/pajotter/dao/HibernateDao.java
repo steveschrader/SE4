@@ -96,6 +96,21 @@ class HibernateDao {
         }
         return result;
     }
+    //Dit is specifiek voor het ophalen van rollen.
+    
+    protected Object sessionGetAllObjectsById(String classname, int id) {
+        //Object result = null;
+        Query query = null;
+ 		List result = null;
+        try {
+            query = sessionFactory.getCurrentSession().createQuery("from "+classname+" where id="+id);
+            result = query.list();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     protected void sessionUpdateObject(Object o) {
         try {

@@ -1,6 +1,9 @@
 package be.odisee.pajotter.service;
 
+
+import be.odisee.pajotter.utilities.RolNotFoundException;
 import be.odisee.pajotter.domain.*;
+
 import java.util.List;
 
 public interface PajottersSessieService {
@@ -29,5 +32,13 @@ public interface PajottersSessieService {
     public void updatePartij(Partij partijid);
 
     public List<Partij> geefAllePartijen();
+    
+    public List<Rol> geefAlleRollen(int id);
+    
+    public Rol voegRolToe(String type, int partijId, String usernaam) throws RolNotFoundException;
+
+    public Rol zoekRolMetId(int id);
+
+    public Rol zoekRolMetUserid(String userid);
 
 }

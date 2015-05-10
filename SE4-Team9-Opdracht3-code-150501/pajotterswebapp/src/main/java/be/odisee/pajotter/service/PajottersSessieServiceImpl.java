@@ -1,5 +1,7 @@
 package be.odisee.pajotter.service;
 
+
+import be.odisee.pajotter.utilities.RolNotFoundException;
 import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.dao.*;
 
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.*;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly=true)
 public class PajottersSessieServiceImpl implements PajottersSessieService {
 	private PartijDao partijDao;
+	private RolDao rolDao;
 	
 	public PajottersSessieServiceImpl(){}
 
@@ -29,8 +32,7 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 		return partijDao.savePartij("actief", voornaam, familienaam, emailadres, paswoord);	
 	}
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-	public Partij voegPartijToe(String voornaam, String familienaam,
-			String emailadres, String paswoord, String rol) {
+	public Partij voegPartijToe(String voornaam, String familienaam, String emailadres, String paswoord, String rol) {
 		return partijDao.savePartij("actief", voornaam, familienaam, emailadres, paswoord, rol);	
 	}
 
@@ -56,6 +58,28 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 	public List<Partij> geefAllePartijen() {
 		return partijDao.getAllPartijen();
 	}
+
+	
+	public List<Rol> geefAlleRollen(int id) {
+		return rolDao.getAllRollen(id);
+	}
+	
+	@Override
+    public Rol voegRolToe(String type, int partijId, String usernaam) throws RolNotFoundException {
+       // Sessie deSessie = zoekSessieMetId(sessieId);
+        Partij dePartij = zoekPartijMetId(partijId);
+        Rol deRol = dePartij.voegRolToe(type, "actief", usernaam);
+        deRol = rolDao.saveRol(deRol);
+        return deRol;
+    }
+
+    public Rol zoekRolMetId(int id) {
+        return rolDao.getRolById(id);
+    }
+
+    public Rol zoekRolMetUserid(String userid) {
+        return rolDao.getRolByUserid(userid);
+    }
 
 	//Telers MOET NOG AANGEPAST WORDEN!!!
    /* private TelerDao telerDao;

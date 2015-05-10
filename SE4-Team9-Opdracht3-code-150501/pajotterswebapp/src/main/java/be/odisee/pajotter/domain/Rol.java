@@ -24,6 +24,9 @@ public abstract class Rol implements Serializable{
 
 	    @Column
 	    protected String status;
+	    
+	    /*@Column
+		private String type;*/
 
 	    @Column(unique=true)
 	    @Index(name="IRol_usernaam",columnNames="usernaam")
@@ -53,6 +56,13 @@ public abstract class Rol implements Serializable{
 	        //this.sessie = sessie;
 	        this.partij = partij;
 	    }
+	   /* public Rol(String status, String usernaam, Partij partij, String type) {
+	        this.id = id;
+	        this.status = status;
+	        this.usernaam = usernaam;
+	        this.type = type;
+	        this.partij = partij;
+	    }*/
 
 	    public int getId() {
 	        return id;
@@ -67,6 +77,7 @@ public abstract class Rol implements Serializable{
 	    }
 
 	    public abstract String getType();
+	   // public abstract String setType();
 	    
 	    //public void setSessie(Sessie newVal){
 	    //    sessie = newVal;
@@ -79,4 +90,8 @@ public abstract class Rol implements Serializable{
 	    public void setPartij(Partij partij) {
 	        this.partij = partij;
 	    }
+
+		/*public void setType(String type) {
+			this.type = type;
+		}*/
 }
