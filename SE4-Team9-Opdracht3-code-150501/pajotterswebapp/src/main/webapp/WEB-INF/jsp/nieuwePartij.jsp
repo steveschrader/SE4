@@ -43,7 +43,7 @@
 				            	<tr>
    									<td><label for="rol">Rol:</label></td>
    									
-   									<td><form:select id="rol" value="rol" path="" var="rol">
+   									<td><form:select id="rol" value="rol" path="rol" var="rol">
 									  <option value="Industrie">Industrie</option>
 									  <option value="Koper">Koper</option>
 									  <option value="Leverancier">Leverancier</option>
