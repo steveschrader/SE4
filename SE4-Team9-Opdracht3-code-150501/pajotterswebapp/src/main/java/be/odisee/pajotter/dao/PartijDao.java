@@ -1,7 +1,6 @@
 package be.odisee.pajotter.dao;
 
 import be.odisee.pajotter.domain.*;
-
 import java.util.List;
 
 public interface PartijDao {
@@ -19,5 +18,6 @@ public interface PartijDao {
     public void updatePartij(Partij partij);
     
     public void deletePartij(int partijId);
-
+    
+    //Boe kan je dit lezen?
 }
