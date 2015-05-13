@@ -40,5 +40,7 @@ public interface PajottersSessieService {
     public Rol zoekRolMetId(int id);
 
     public Rol zoekRolMetUserid(String userid);
+    
+    public void verwijderRol(int id);
 
 }

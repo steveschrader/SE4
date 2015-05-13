@@ -18,7 +18,6 @@
 			<div id="Inhoud">
 				<p>Vul de het onderstaande formulier in om een nieuwe teler aan te maken.</p>
 		        <c:url var="url" value="/nieuwePartij.html">
-		        
 		        </c:url>
 		        <form:form action="${url}" commandName="departij">   <%-- Spring form tags --%>
 			            <table>

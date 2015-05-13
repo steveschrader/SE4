@@ -33,11 +33,7 @@
 		        		<td><b>Paswoord:</b></td> <td><c:out value="${partij.paswoord}"/></td>
 		        	</tr>
 		        	<tr>
-		        		<c:forEach items="${rollen}" var="rol">
-			                <td>
-			                        <c:out value="${rol.type}" />
-			                </td>
-		            </c:forEach>
+		        	<td><b>Rol:</b></td> <td><c:out value="${rol.getType()}"/></td>
 		        	</tr>
 		        	
 		        </table>

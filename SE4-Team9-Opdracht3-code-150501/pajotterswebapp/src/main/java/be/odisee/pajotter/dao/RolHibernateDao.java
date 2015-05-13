@@ -27,7 +27,7 @@ public class RolHibernateDao extends HibernateDao implements RolDao {
     }
 
     public Rol getRolById(int id) {
-        return (Rol) sessionGetObjectById("Rol", id);
+        return (Rol) sessionGetObjectByIdROL("Rol", id);
     }
 
     public Rol getRolByUserid(String userid) {
@@ -38,6 +38,14 @@ public class RolHibernateDao extends HibernateDao implements RolDao {
 
         return (Rol) sessionGetObjectBy1StringParameterNamedQuery(qstr,parameter,userid);
     }
+
+
+	public void deleteRol(int id) {
+		Rol rol = getRolById(id);
+		sessionDeleteObject(rol);		
+	}
+
+	
 		
 	
 }

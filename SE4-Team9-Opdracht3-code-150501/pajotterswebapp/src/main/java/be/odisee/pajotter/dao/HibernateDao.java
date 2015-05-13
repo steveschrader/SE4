@@ -36,6 +36,17 @@ class HibernateDao {
         }
         return result;
     }
+    
+    protected Object sessionGetObjectByIdROL(String classname, int id) {
+        Object result = null;
+        try {
+            result = sessionFactory.getCurrentSession().createQuery("from "+classname+" where partij_id="+id).uniqueResult();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     protected Object getLastObjectOfQuery(String qstr) {
         Object result = null;

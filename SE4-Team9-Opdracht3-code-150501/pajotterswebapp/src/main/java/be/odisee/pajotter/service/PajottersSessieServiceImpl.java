@@ -85,6 +85,12 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
         return rolDao.getRolByUserid(userid);
     }
 
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void verwijderRol(int id) {
+    	rolDao.deleteRol(id);
+		
+	}
+
 	//Telers MOET NOG AANGEPAST WORDEN!!!
    /* private TelerDao telerDao;
 

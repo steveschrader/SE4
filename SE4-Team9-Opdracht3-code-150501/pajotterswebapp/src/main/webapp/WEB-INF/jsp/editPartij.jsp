@@ -54,6 +54,16 @@
 								<td><form:input id="pwoord" path="paswoord" /></td>
 								<td><font color="red"><form:errors path="paswoord" /></font></td>
 							</tr>
+							<tr>
+								<td><label for="rol">Rol:</label></td>
+								<td><form:select id="rol" path="" name="rol">
+										  <option value="Industrie">Industrie</option>
+										  <option value="Koper">Koper</option>
+										  <option value="Leverancier">Leverancier</option>
+										  <option value="Pajotter">Pajotter</option>
+										  <option value="Teler">Teler</option>
+								</form:select></td>
+							</tr>
 						</tbody>
 					</table>
 					

@@ -16,4 +16,6 @@ public interface RolDao {
     public Rol getRolById(int id);
 
     public Rol getRolByUserid(String userid);
+    
+    public void deleteRol(int id);
 }

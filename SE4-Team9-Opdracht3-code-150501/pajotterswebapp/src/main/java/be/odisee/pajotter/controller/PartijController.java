@@ -28,18 +28,15 @@ public class PartijController {
         model.addAttribute("partijen", deLijst);
         return "/index";
     }
-    // details van de partijen
+    // details van de partij
 
     @RequestMapping(value={"/partij.html"}, method = RequestMethod.GET)
     public String partijDetail(@RequestParam("id") Integer id, ModelMap model){
-        Partij partij = pajottersSessieService.zoekPartijMetId(id);
-        //Dit om te proberen alle rollen dat een partij heeft te tonen
-       //List<Rol> derol = pajottersSessieService.geefAlleRollen(1);
-       // model.addAttribute("rollen", derol);
-        //
-        
+      
+        	Partij partij = pajottersSessieService.zoekPartijMetId(id);
+        	Rol rol = pajottersSessieService.zoekRolMetId(id);
         model.addAttribute("partij", partij);
-        
+        model.addAttribute("rol", rol);
         return "/partij";
     }
     // om een teler toe te voegen
@@ -70,17 +67,30 @@ public class PartijController {
     }
     //om de teler up te daten
     @RequestMapping(value={"/updatePartij.html"},method=RequestMethod.POST)
-    public String telerUpdate(@ModelAttribute("departij") @Valid Partij partij, BindingResult result, ModelMap model){
+    public String telerUpdate(@ModelAttribute("departij") @Valid Partij partij, BindingResult result, ModelMap model, @RequestParam String rol){
     	if (result.hasErrors()) return "/editPartij"; 
+    	pajottersSessieService.verwijderRol(partij.getId());
     	pajottersSessieService.updatePartij(partij);
+    	try {
+			pajottersSessieService.voegRolToe(rol, partij.getId(), partij.getEmailadres());
+		} catch (RolNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	Rol rol1 = pajottersSessieService.zoekRolMetId(partij.getId());
         model.addAttribute("partij", partij);
+        model.addAttribute("rol", rol1);
+
         return "/partij";
     }
     //om naar de update pagina te gaan en de teler info mee te geven
     @RequestMapping(value={"/updatePartij.html"},method=RequestMethod.GET)
     public String telerEditpagina(@RequestParam("id") Integer id, ModelMap model){
     	Partij partij = pajottersSessieService.zoekPartijMetId(id);
+    	Rol rol = pajottersSessieService.zoekRolMetId(id);
         model.addAttribute("departij", partij);
+        model.addAttribute("rol", rol);
         return "/editPartij";
     }
     
