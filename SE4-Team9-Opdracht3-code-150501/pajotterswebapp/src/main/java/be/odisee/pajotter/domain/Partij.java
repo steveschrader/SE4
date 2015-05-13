@@ -131,7 +131,7 @@ public class Partij implements Serializable{
 
 	
     public Rol voegRolToe(String type, String status, String usernaam) throws RolNotFoundException{
-        Rol newRol=null;
+        Rol newRol = null;
         if (type.toLowerCase().equals("administrator")) newRol= new Administrator(status, usernaam, this);
         if (type.toLowerCase().equals("teler")) newRol= new Teler(status, usernaam, this);
         if (type.toLowerCase().equals("pajotter")) newRol= new Pajotter(status, usernaam, this);

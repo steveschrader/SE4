@@ -18,7 +18,7 @@
 			<div id="Inhoud">
 				<p>Vul de het onderstaande formulier in om een nieuwe teler aan te maken.</p>
 		        <c:url var="url" value="/nieuwePartij.html">
-		        	<c:param name="rol" value="${rol}" />
+		        
 		        </c:url>
 		        <form:form action="${url}" commandName="departij">   <%-- Spring form tags --%>
 			            <table>
@@ -41,16 +41,18 @@
 				            	</tr>
 				            	
 				            	<tr>
-   									<td><label for="rol">Rol:</label></td>
+   									<td><label for="rol">Rol4:</label></td>
    									
 
-   									<td><form:select id="rol" value="rol" path="" var="rol">
-									  <option value="Industrie">Industrie</option>
-									  <option value="Koper">Koper</option>
-									  <option value="Leverancier">Leverancier</option>
-									  <option value="Pajotter">Pajotter</option>
-									  <option value="Teler">Teler</option>
-									</form:select></td>
+   									<td>
+	   									<form:select id="rol" path="" name="rol">
+										  <option value="Industrie">Industrie</option>
+										  <option value="Koper">Koper</option>
+										  <option value="Leverancier">Leverancier</option>
+										  <option value="Pajotter">Pajotter</option>
+										  <option value="Teler">Teler</option>
+										</form:select>
+									</td>
 									
 									
    									

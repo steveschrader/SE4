@@ -25,6 +25,11 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
     {
         this.partijDao = partijDao;
     }
+    @Autowired //!!! Dit is zeer belangrijk ofanders is er geen verbinding met de database.
+    public void setRolDao(RolDao rolDao)
+    {
+        this.rolDao = rolDao;
+    }
     
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
 	public Partij voegPartijToe(String voornaam, String familienaam,
@@ -64,9 +69,8 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 		return rolDao.getAllRollen(id);
 	}
 	
-	@Override
+	//@Override
     public Rol voegRolToe(String type, int partijId, String usernaam) throws RolNotFoundException {
-       // Sessie deSessie = zoekSessieMetId(sessieId);
         Partij dePartij = zoekPartijMetId(partijId);
         Rol deRol = dePartij.voegRolToe(type, "actief", usernaam);
         deRol = rolDao.saveRol(deRol);

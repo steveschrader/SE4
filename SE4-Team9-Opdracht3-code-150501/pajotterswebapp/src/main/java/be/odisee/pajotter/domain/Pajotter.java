@@ -1,7 +1,6 @@
 package be.odisee.pajotter.domain;
 
 import java.util.List;
-
 import javax.persistence.*;
 
 

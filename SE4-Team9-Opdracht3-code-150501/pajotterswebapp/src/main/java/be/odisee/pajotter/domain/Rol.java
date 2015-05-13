@@ -25,8 +25,7 @@ public abstract class Rol implements Serializable{
 	    @Column
 	    protected String status;
 	    
-	    /*@Column
-		private String type;*/
+	   
 
 	    @Column(unique=true)
 	    @Index(name="IRol_usernaam",columnNames="usernaam")

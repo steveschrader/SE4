@@ -46,9 +46,17 @@ public class PartijController {
     
     @RequestMapping(value={"/nieuwePartij.html"},method=RequestMethod.GET)
     public String partijFormulier(ModelMap model){
+    	Rol rol = new Rol() {
+			
+			@Override
+			public String getType() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		};
         Partij partij = new Partij();
         model.addAttribute("departij", partij);
-       // model.addAttribute("derol", derol);
+        model.addAttribute("derol", rol);
         return "/nieuwePartij";
     }
     
@@ -82,16 +90,19 @@ public class PartijController {
     public String partijToevoegen(@ModelAttribute("departij") @Valid Partij partij, 
             BindingResult result, ModelMap model, @RequestParam String rol){
     	if (result.hasErrors()) return "/nieuwePartij"; 
-        Partij toegevoegdPartij = pajottersSessieService.voegPartijToe(partij.getVoornaam(), partij.getFamilienaam(), partij.getEmailadres(), partij.getPaswoord());
+        //Partij toegevoegdPartij = pajottersSessieService.voegPartijToe(partij.getVoornaam(), partij.getFamilienaam(), partij.getEmailadres(), partij.getPaswoord());
        // Rol toegevoegdRol = pajottersSessieService.voegRolToe()
+    	Partij toegevoegdPartij = null;
         
-		/*try {
-			Rol nieuweRol = pajottersSessieService.voegRolToe(rol, partij.getId(), partij.getEmailadres());
+		try {
+			toegevoegdPartij = pajottersSessieService.voegPartijToe(partij.getVoornaam(), partij.getFamilienaam(), partij.getEmailadres(), partij.getPaswoord());
+			Rol nieuweRol = pajottersSessieService.voegRolToe(rol, toegevoegdPartij.getId(), partij.getEmailadres());
+			//pajottersSessieService.voegRolToe("pajotter", toegevoegdPartij.getId(), partij.getEmailadres());
 		} catch (RolNotFoundException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 			System.out.println("probleem hier!!!");
-		}*/
+		}
         System.out.println("DEBUG partijgegevens familienaam: " + partij.getFamilienaam() +" rol:"+ rol);
         return "redirect:partij.html?id=" + toegevoegdPartij.getId();
     }
