@@ -3,14 +3,23 @@ package be.odisee.pajotter.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 @Entity
 @DiscriminatorValue("Productie")
 public class Productie extends Bericht implements Serializable{
 	public Productie(){}
-
+	
+	@Column
+	private int aantal;
+	
     public Productie(int id, String status, Partij partij, Bericht reactieOp, String tekst) throws Exception {
         super(id, status, partij, tekst);
+      //  if (reactieOp == null) throw new Exception("FOUT");
+       // this.reactieOp = reactieOp;
+    }
+    
+    public Productie(String status, Partij partij, Bericht reactieOp, String tekst, int aantal) throws Exception {
+        super(status, partij, tekst);
+        this.aantal = aantal;
       //  if (reactieOp == null) throw new Exception("FOUT");
        // this.reactieOp = reactieOp;
     }
@@ -27,6 +36,15 @@ public class Productie extends Bericht implements Serializable{
     public void setReactieOp(Bericht newVal){
         reactieOp = newVal;
     }
+    
+
+	public int getAantal() {
+		return aantal;
+	}
+
+	public void setAantal(int aantal) {
+		this.aantal = aantal;
+	}
 
 	
 }

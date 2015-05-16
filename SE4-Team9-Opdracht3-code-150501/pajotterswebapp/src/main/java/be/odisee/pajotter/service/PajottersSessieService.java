@@ -35,15 +35,15 @@ public interface PajottersSessieService {
     public void verwijderRol(int id);
     
     //Productie aanbieden
-    public Productie VoegProductieToe(Productie productie);
+    public Productie VoegProductieToe(String status, Partij partij, String tekst);
 
-    public Productie zoekProductieMetId(int productId);
+    public Productie zoekProductieMetId(int productieId);
 
     public List<Productie> geefAlleProductie();
 
     public void updateProductie(Productie productie);
     
-    public void verwijderProductie(Productie productie);
+    public void verwijderProductie(int productieID);
     
 
 }
