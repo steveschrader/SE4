@@ -69,7 +69,7 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 		return rolDao.getAllRollen(id);
 	}
 	
-	//@Override
+	
     public Rol voegRolToe(String type, int partijId, String usernaam) throws RolNotFoundException {
         Partij dePartij = zoekPartijMetId(partijId);
         Rol deRol = dePartij.voegRolToe(type, "actief", usernaam);
@@ -91,49 +91,37 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 		
 	}
 
-	//Telers MOET NOG AANGEPAST WORDEN!!!
-   /* private TelerDao telerDao;
+    //PRODUCTIE
+	@Override
+	public Productie VoegProductieToe(Productie productie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public PajottersSessieServiceImpl(){}
+	@Override
+	public Productie zoekProductieMetId(int productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Autowired
-    public void setTelerDao(TelerDao telerDao)
-    {
-        this.telerDao = telerDao;
-    }
+	@Override
+	public List<Productie> geefAlleProductie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-    public Teler voegTelerToe(String username, Partij partij, String adres, String telefoon)
-    {
-    	//String status, String usernaam, Partij partij, String adres, String telefoon
-    	
-        return telerDao.saveTeler("actief", username, partij, adres, telefoon);
-    }
+	@Override
+	public void updateProductie(Productie productie) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void verwijderProductie(Productie productie) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	
-    
-    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-    public Teler zoekTelerMetId(int id)
-    {
-        return telerDao.getTelerById(id);
-    }
-    
-    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-    public void verwijderTeler(int teler){
-        telerDao.deleteTeler(teler);
-    }
-    
-    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-    public void updateTeler(Teler teler)
-    {
-        telerDao.updateTeler(teler);
-    }
-
-    public List<Teler> geefAlleTelers()
-    {
-        return telerDao.getAllTelers();
-    }*/
-
-    //PARTIJEN !!!
 	
 }

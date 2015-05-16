@@ -7,24 +7,13 @@ import be.odisee.pajotter.domain.*;
 import java.util.List;
 
 public interface PajottersSessieService {
-//Telers, MOET NOG AANGEPAST WORDEN
-    //public Teler voegTelerToe(String voornaam, String familienaam, String emailadres, String paswoord);
-	//public Teler voegTelerToe(String voornaam, String familienaam, String emailadres, String paswoord, String adres, String telefoon);
 
-	//public Teler zoekTelerMetId(int id);
     
-	//public void verwijderTeler(int telerid);
-    
-	//public void updateTeler(Teler telerid);
-
-	//public List<Teler> geefAlleTelers();
-    
-    
-    //partijen
+    //Partijen
     public Partij voegPartijToe(String voornaam, String familienaam, String emailadres, String paswoord, String rol);
+    
     public Partij voegPartijToe(String voornaam, String familienaam, String emailadres, String paswoord);
-   // public Teler voegTelerToe(String voornaam, String familienaam, String emailadres, String paswoord, String adres, String telefoon);
-
+    
     public Partij zoekPartijMetId(int id);
     
     public void verwijderPartij(int partijid);
@@ -32,6 +21,8 @@ public interface PajottersSessieService {
     public void updatePartij(Partij partijid);
 
     public List<Partij> geefAllePartijen();
+    
+    	//Toevoegen van rollen aan partijen
     
     public List<Rol> geefAlleRollen(int id);
     
@@ -42,5 +33,17 @@ public interface PajottersSessieService {
     public Rol zoekRolMetUserid(String userid);
     
     public void verwijderRol(int id);
+    
+    //Productie aanbieden
+    public Productie VoegProductieToe(Productie productie);
+
+    public Productie zoekProductieMetId(int productId);
+
+    public List<Productie> geefAlleProductie();
+
+    public void updateProductie(Productie productie);
+    
+    public void verwijderProductie(Productie productie);
+    
 
 }

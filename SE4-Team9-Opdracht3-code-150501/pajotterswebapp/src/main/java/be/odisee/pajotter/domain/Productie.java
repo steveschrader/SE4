@@ -11,14 +11,13 @@ public class Productie extends Bericht implements Serializable{
 
     public Productie(int id, String status, Partij partij, Bericht reactieOp, String tekst) throws Exception {
         super(id, status, partij, tekst);
-        if (reactieOp == null) throw new Exception("FOUT");
-        this.reactieOp = reactieOp;
+      //  if (reactieOp == null) throw new Exception("FOUT");
+       // this.reactieOp = reactieOp;
     }
 
-    public Productie(String status, Partij partij, Bericht reactieOp, String tekst) throws Exception {
+    public Productie(String status, Partij partij, String tekst) throws Exception {
         super(status, partij, tekst);
-        if (reactieOp == null) throw new Exception("FOUT");
-        this.reactieOp = reactieOp;
+        
     }
 
     public Bericht getReactieOp(){
