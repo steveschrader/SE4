@@ -11,8 +11,8 @@ import be.odisee.pajotter.domain.*;
 public class Antwoord extends Bericht implements Serializable{
 	public Antwoord(){}
 
-    public Antwoord(int id, String status, Partij partij, Bericht reactieOp, String tekst) throws Exception {
-        super(id, status, partij, tekst);
+    public Antwoord(int id, String status, String type, Partij partij, Bericht reactieOp, String tekst) throws Exception {
+        super(id, status, type, partij, tekst);
         if (reactieOp == null) throw new Exception("FOUT");
         this.reactieOp = reactieOp;
     }
