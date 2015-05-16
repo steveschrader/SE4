@@ -5,17 +5,17 @@ import javax.persistence.*;
 
 
 @Entity
-@DiscriminatorValue("Antwoord")
-public class Antwoord extends Bericht implements Serializable{
-	public Antwoord(){}
+@DiscriminatorValue("Productie")
+public class Productie extends Bericht implements Serializable{
+	public Productie(){}
 
-    public Antwoord(int id, String status, Partij partij, Bericht reactieOp, String tekst) throws Exception {
+    public Productie(int id, String status, Partij partij, Bericht reactieOp, String tekst) throws Exception {
         super(id, status, partij, tekst);
         if (reactieOp == null) throw new Exception("FOUT");
         this.reactieOp = reactieOp;
     }
 
-    public Antwoord(String status, Partij partij, Bericht reactieOp, String tekst) throws Exception {
+    public Productie(String status, Partij partij, Bericht reactieOp, String tekst) throws Exception {
         super(status, partij, tekst);
         if (reactieOp == null) throw new Exception("FOUT");
         this.reactieOp = reactieOp;

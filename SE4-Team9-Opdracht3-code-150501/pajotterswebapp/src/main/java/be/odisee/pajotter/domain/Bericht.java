@@ -23,14 +23,14 @@ public class Bericht {
 	    protected String status;
 	    
 	    /*@Column
-		private String type;*/
+	    protected String type;*/
 
 	    @Column
 	    protected String tekst;
 
 	    @ManyToOne
 	    @JoinColumn(name="partij_id")
-	   protected Partij m_Partij;
+	    protected Partij m_Partij;
 
 	    //@ManyToOne
 	    //@JoinColumn(name="onderwerp_id",nullable=false)
@@ -56,6 +56,7 @@ public class Bericht {
 	        this.status = status;
 	        this.m_Partij = m_Partij;
 	        this.tekst = tekst;
+	        
 	       // this.setType(type);
 	        //this.type = type;
 	        //this.onderwerp = onderwerp;
@@ -92,8 +93,8 @@ public class Bericht {
 
 	    public String getType(){
 	        String fullyQualifiedClassname = this.getClass().toString();
-	        if (fullyQualifiedClassname.contains("Idee")) return("Idee");
-	        else if(fullyQualifiedClassname.contains("Reactie")) return ("Reactie");
+	        if (fullyQualifiedClassname.contains("Antwoord")) return("Antwoord");
+	        else if(fullyQualifiedClassname.contains("Productie")) return ("Productie");
 	        else throw new RuntimeException();
 	    }
 
