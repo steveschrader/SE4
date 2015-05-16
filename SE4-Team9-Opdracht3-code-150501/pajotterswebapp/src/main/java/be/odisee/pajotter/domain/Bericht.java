@@ -21,8 +21,9 @@ public class Bericht {
 
 	    @Column
 	    protected String status;
-	    @Column
-	    protected String type;
+	    
+	    /*@Column
+		private String type;*/
 
 	    @Column
 	    protected String tekst;
@@ -50,12 +51,13 @@ public class Bericht {
 
 	    public Bericht(){}
 
-	    public Bericht(int id, String status, String type, Partij m_Partij, String tekst) {
+	    public Bericht(int id, String status, /*String type,*/ Partij m_Partij, String tekst) {
 	        this.id = id;
 	        this.status = status;
 	        this.m_Partij = m_Partij;
 	        this.tekst = tekst;
-	        this.type = type;
+	       // this.setType(type);
+	        //this.type = type;
 	        //this.onderwerp = onderwerp;
 	        //this.rangId = onderwerp.getBijdragen().size()+1;
 	    }
@@ -97,7 +99,7 @@ public class Bericht {
 
 	    public Antwoord voegAntwoordToe(int id, Partij partij, String tekst) throws Exception{
 	        Antwoord newReactie=null;
-	        newReactie= new Antwoord(id, "actief", type, partij, this, tekst);
+	        newReactie= new Antwoord(id, "actief", partij, this, tekst);
 	        m_Antwoorden.add(newReactie);
 	        return newReactie;
 	    }
@@ -149,5 +151,9 @@ public class Bericht {
 	        /* moet nog uitgewerkt worden */
 	        return false;
 	    }
+
+		/*public void setType(String type) {
+			this.type = type;
+		}*/
 
 }
