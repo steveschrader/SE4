@@ -35,7 +35,7 @@ public interface PajottersSessieService {
     public void verwijderRol(int id);
     
     //Productie aanbieden
-    public Productie VoegProductieToe(String status, Partij partij, String tekst);
+    public Productie VoegProductieToe(String status, Partij partij, String tekst, int aantal);
 
     public Productie zoekProductieMetId(int productieId);
 

@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.*;
 
 import org.hibernate.annotations.IndexColumn;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import be.odisee.pajotter.domain.*;
 
 @Entity
@@ -26,6 +28,7 @@ public class Bericht {
 	    protected String type;*/
 
 	    @Column
+	    @NotEmpty(message="Vul tekst in aub")
 	    protected String tekst;
 
 	    @ManyToOne

@@ -1,7 +1,10 @@
 package be.odisee.pajotter.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @DiscriminatorValue("Productie")
@@ -9,6 +12,7 @@ public class Productie extends Bericht implements Serializable{
 	public Productie(){}
 	
 	@Column
+	//@NotEmpty(message="Vul een aantal in AUB")
 	private int aantal;
 	
     public Productie(int id, String status, Partij partij, Bericht reactieOp, String tekst) throws Exception {
@@ -17,7 +21,7 @@ public class Productie extends Bericht implements Serializable{
        // this.reactieOp = reactieOp;
     }
     
-    public Productie(String status, Partij partij, Bericht reactieOp, String tekst, int aantal) throws Exception {
+    public Productie(String status, Partij partij, String tekst, int aantal) throws Exception {
         super(status, partij, tekst);
         this.aantal = aantal;
       //  if (reactieOp == null) throw new Exception("FOUT");

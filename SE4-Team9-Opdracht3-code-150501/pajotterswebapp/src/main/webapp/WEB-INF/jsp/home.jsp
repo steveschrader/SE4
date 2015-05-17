@@ -16,7 +16,8 @@
 		<div id="MiddenPaneel">
 			<div id="Inhoud">
 				<div class="knoppenpaneel">
-					<a class="knop" href="index.html">Home</a>
+					<a class="knop" href="/index.html">Home</a>
+					<a class="knop" href="productieLijst.html">ProductieLijst</a>
 				</div>
 			</div>
 		</div>

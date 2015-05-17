@@ -17,7 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/")
+//@RequestMapping("/Partij")
 public class PartijController {
 	@Autowired
     protected PajottersSessieService pajottersSessieService=null; // ready for dependency injection

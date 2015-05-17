@@ -104,10 +104,10 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 
     //PRODUCTIE
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-	public Productie VoegProductieToe(String status, Partij partij, String tekst) {
+	public Productie VoegProductieToe(String status, Partij partij, String tekst, int aantal) {
 		Productie deproductie = null;
 		try {
-			deproductie = new Productie(status,partij, tekst);
+			deproductie = new Productie(status,partij, tekst, aantal);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
