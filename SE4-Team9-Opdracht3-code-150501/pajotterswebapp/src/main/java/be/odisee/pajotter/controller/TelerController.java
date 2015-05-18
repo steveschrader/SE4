@@ -11,6 +11,18 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/")
 public class TelerController {
+	
+	@Autowired
+    protected PajottersSessieService brainstormSessieService = null;
+	
+	@RequestMapping(value = {"/nieuweCoachingvraag.html"}, method = RequestMethod.GET)
+	public String coachingvraag(ModelMap model)
+	{
+		//Hier komt nog wat code
+		return "redirect:Teler/nieuweCoachingvraag.html";
+	}
+	
+	
 	//Dit is nu de partij controller geworden
 
   /*  @Autowired

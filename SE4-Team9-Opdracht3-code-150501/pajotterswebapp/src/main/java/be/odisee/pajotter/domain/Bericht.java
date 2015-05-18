@@ -1,24 +1,22 @@
 package be.odisee.pajotter.domain;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.*;
-
 import org.hibernate.annotations.IndexColumn;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import be.odisee.pajotter.domain.*;
 
 @Entity
-@Table(name="berichten")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type",discriminatorType=DiscriminatorType.STRING)
+@Table(name = "berichten")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("Bericht")
 public class Bericht {
 	
 		@Id
-	    @GeneratedValue(strategy=GenerationType.AUTO)
+	    @GeneratedValue(strategy = GenerationType.AUTO)
 	    protected int id;
 
 	    @Column
@@ -28,11 +26,11 @@ public class Bericht {
 	    protected String type;*/
 
 	    @Column
-	    @NotEmpty(message="Vul tekst in aub")
+	    @NotEmpty(message = "Vul tekst in aub")
 	    protected String tekst;
 
 	    @ManyToOne
-	    @JoinColumn(name="partij_id")
+	    @JoinColumn(name = "partij_id")
 	    protected Partij m_Partij;
 
 	    //@ManyToOne
@@ -47,7 +45,7 @@ public class Bericht {
 	    @JoinColumn(name="reactie_op_id")
 	    protected Bericht reactieOp;
 
-	    @OneToMany(fetch=FetchType.EAGER,mappedBy="reactieOp")
+	    @OneToMany(fetch = FetchType.EAGER, mappedBy = "reactieOp")
 	    @IndexColumn(name="id")
 	    private List<Bericht> m_Antwoorden = new ArrayList<Bericht>();
 
@@ -60,7 +58,7 @@ public class Bericht {
 	        this.m_Partij = m_Partij;
 	        this.tekst = tekst;
 	        
-	       // this.setType(type);
+	        //this.setType(type);
 	        //this.type = type;
 	        //this.onderwerp = onderwerp;
 	        //this.rangId = onderwerp.getBijdragen().size()+1;
@@ -86,7 +84,6 @@ public class Bericht {
 	        //return m_Partij.getUsernaam();
 	        return ""+ m_Partij.getId();
 	    }
-
 	    
 	    //Om een antwoord te kunnen geven
 	    public int getReactieOpBijdrageId() {
@@ -103,14 +100,14 @@ public class Bericht {
 
 	    public Antwoord voegAntwoordToe(int id, Partij partij, String tekst) throws Exception{
 	        Antwoord newReactie=null;
-	        newReactie= new Antwoord(id, "actief", partij, this, tekst);
+	        newReactie = new Antwoord(id, "actief", partij, this, tekst);
 	        m_Antwoorden.add(newReactie);
 	        return newReactie;
 	    }
 
 	    public Antwoord voegReactieToe(Partij partij, String tekst) throws Exception{
-	        Antwoord newReactie=null;
-	        newReactie= new Antwoord("actief", partij, this, tekst);
+	        Antwoord newReactie = null;
+	        newReactie = new Antwoord("actief", partij, this, tekst);
 	        m_Antwoorden.add(newReactie);
 	        return newReactie;
 	    }
@@ -131,8 +128,6 @@ public class Bericht {
 	        this.m_Antwoorden = m_Antwoorden;
 	    }
 
-	   
-
 	    public void setReactieOp(Bericht reactieOp) {
 	        this.reactieOp = reactieOp;
 	    }
@@ -144,7 +139,6 @@ public class Bericht {
 	    public void setTekst(String tekst) {
 	        this.tekst = tekst;
 	    }
-
 
 	    public boolean verwijderBijdrage(){
 	        /* moet nog uitgewerkt worden */
