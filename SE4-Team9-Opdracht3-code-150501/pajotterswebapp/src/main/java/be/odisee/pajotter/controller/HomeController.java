@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	  public String home(Model model) {
-	    return "home";
+	    return "/index";
 	  }
 	
 	@RequestMapping(value={"/jquery.js"},method=RequestMethod.GET)

@@ -1,7 +1,6 @@
 package be.odisee.pajotter.dao;
 
 import be.odisee.pajotter.domain.*;
-
 import java.util.List;
 
 public interface ProductieDao {
@@ -15,8 +14,6 @@ public interface ProductieDao {
     public void updateProductie(Productie productie);
     
     public void deleteProductie(int productieId);
-    
 
    // public void updateBijdrageRangId(Bijdrage bijdrage, int rangId);
-
 }

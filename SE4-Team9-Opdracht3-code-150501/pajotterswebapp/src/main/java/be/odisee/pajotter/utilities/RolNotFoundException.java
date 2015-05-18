@@ -1,13 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package be.odisee.pajotter.utilities;
 
 /**
  *
- * @author hans
+ * @author Hans Vandenbogaerde
  */
 public class RolNotFoundException extends Exception {
 
@@ -16,7 +11,6 @@ public class RolNotFoundException extends Exception {
      */
     public RolNotFoundException() {
     }
-
 
     /**
      * Constructs an instance of <code>RolNotFoundException</code> with the specified detail message.

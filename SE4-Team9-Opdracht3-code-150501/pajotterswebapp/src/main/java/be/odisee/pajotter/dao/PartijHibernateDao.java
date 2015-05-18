@@ -1,17 +1,15 @@
 package be.odisee.pajotter.dao;
 
 import java.util.List;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
-
 import be.odisee.pajotter.domain.Partij;
 import be.odisee.pajotter.domain.Teler;
 import be.odisee.pajotter.utilities.RolNotFoundException;
 
 @Repository("partijDao")
-@Transactional(propagation= Propagation.SUPPORTS, readOnly=true)
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class PartijHibernateDao extends HibernateDao implements PartijDao {
 
     public Partij savePartij(String status, String voornaam, String familienaam, String emailadres, String paswoord, String rol) {
@@ -54,7 +52,4 @@ public class PartijHibernateDao extends HibernateDao implements PartijDao {
     	Partij partijObj = getPartijById(partijID);
     	sessionDeleteObject(partijObj);
     }
-
-	
-	
 }

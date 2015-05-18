@@ -1,7 +1,6 @@
 package be.odisee.pajotter.dao;
 
 import be.odisee.pajotter.domain.*;
-
 import java.util.List;
 
 public interface TelerDao {
@@ -20,5 +19,4 @@ public interface TelerDao {
     public void updateTeler(Teler teler);
     
     public void deleteTeler(int telerId);
-
 }

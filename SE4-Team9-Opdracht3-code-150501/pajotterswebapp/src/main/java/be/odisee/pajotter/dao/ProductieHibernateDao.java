@@ -1,11 +1,9 @@
 package be.odisee.pajotter.dao;
 
 import java.util.List;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
-
 import be.odisee.pajotter.domain.Partij;
 import be.odisee.pajotter.domain.Productie;
 import be.odisee.pajotter.utilities.RolNotFoundException;
@@ -40,12 +38,5 @@ public class ProductieHibernateDao extends HibernateDao implements ProductieDao 
 	public void deleteProductie(int productieId) {
 		Productie prodObj = getProductieById(productieId);
 		sessionDeleteObject(prodObj);
-		
 	}
-
-   
-
-	
-		
-	
 }

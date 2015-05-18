@@ -1,11 +1,9 @@
 package be.odisee.pajotter.dao;
 
 import java.util.List;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
-
 import be.odisee.pajotter.domain.Partij;
 import be.odisee.pajotter.domain.Rol;
 import be.odisee.pajotter.domain.Teler;
@@ -15,7 +13,6 @@ import be.odisee.pajotter.utilities.RolNotFoundException;
 @Transactional(propagation= Propagation.SUPPORTS, readOnly=true)
 public class RolHibernateDao extends HibernateDao implements RolDao {
 
-    
     @SuppressWarnings("unchecked")
 	public List<Rol> getAllRollen(int partijId) {
 		return (List<Rol>) sessionGetAllObjectsById("Rol", partijId);
@@ -44,8 +41,4 @@ public class RolHibernateDao extends HibernateDao implements RolDao {
 		Rol rol = getRolById(id);
 		sessionDeleteObject(rol);		
 	}
-
-	
-		
-	
 }

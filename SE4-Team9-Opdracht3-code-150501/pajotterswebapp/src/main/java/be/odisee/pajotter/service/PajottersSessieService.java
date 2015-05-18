@@ -1,14 +1,11 @@
 package be.odisee.pajotter.service;
 
-
 import be.odisee.pajotter.utilities.RolNotFoundException;
 import be.odisee.pajotter.domain.*;
-
 import java.util.List;
 
 public interface PajottersSessieService {
 
-    
     //Partijen
     public Partij voegPartijToe(String voornaam, String familienaam, String emailadres, String paswoord, String rol);
     
@@ -44,6 +41,4 @@ public interface PajottersSessieService {
     public void updateProductie(Productie productie);
     
     public void verwijderProductie(int productieID);
-    
-
 }

@@ -18,6 +18,4 @@ public interface PartijDao {
     public void updatePartij(Partij partij);
     
     public void deletePartij(int partijId);
-    
-    //Boe kan je dit lezen?
 }

@@ -1,11 +1,9 @@
 package be.odisee.pajotter.dao;
 
 import java.util.List;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
-
 import be.odisee.pajotter.domain.Partij;
 import be.odisee.pajotter.domain.Teler;
 
@@ -42,7 +40,4 @@ public class TelerHibernateDao extends HibernateDao implements TelerDao {
     	Teler telerObj = getTelerById(telerID);
     	sessionDeleteObject(telerObj);
     }
-
-	
-	
 }

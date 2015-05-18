@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import be.odisee.pajotter.domain.Teler;
 
-class HibernateDao {
+public class HibernateDao {
 
     private SessionFactory sessionFactory;
 
