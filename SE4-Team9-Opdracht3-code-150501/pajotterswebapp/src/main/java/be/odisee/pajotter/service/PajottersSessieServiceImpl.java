@@ -1,9 +1,12 @@
 package be.odisee.pajotter.service;
 
+
 import be.odisee.pajotter.utilities.RolNotFoundException;
 import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.dao.*;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
@@ -15,7 +18,9 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 	
 	//Autowiren met de DAO zeer belangrijk ofanders worden er null objecten door gestuurd naar de databank!
 	private PartijDao partijDao;
+	
 	private RolDao rolDao;
+	
 	private ProductieDao productieDao;
 	
 	public PajottersSessieServiceImpl(){}
@@ -116,7 +121,7 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 		return deproductie;
 	}
 
-	//@Override
+	@Override
 	public List<Productie> geefAlleProductie() {
 		return productieDao.getAllProductie();
 	}

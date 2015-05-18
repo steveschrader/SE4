@@ -1,12 +1,8 @@
 package be.odisee.pajotter.dao;
 
 import org.hibernate.*;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-import be.odisee.pajotter.domain.Productie;
 import be.odisee.pajotter.domain.Teler;
 
 class HibernateDao {
@@ -146,14 +142,4 @@ class HibernateDao {
             e.printStackTrace();
         }
     }
-
-	public Productie getProductieById(int productieId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Productie saveProductie(Productie productie) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
