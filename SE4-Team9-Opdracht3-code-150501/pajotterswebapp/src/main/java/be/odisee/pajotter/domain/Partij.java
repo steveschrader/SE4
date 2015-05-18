@@ -3,14 +3,11 @@ package be.odisee.pajotter.domain;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-
 import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.utilities.RolNotFoundException;
 
