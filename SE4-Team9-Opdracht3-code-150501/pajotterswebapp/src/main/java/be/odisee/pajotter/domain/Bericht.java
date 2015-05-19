@@ -10,9 +10,15 @@ import be.odisee.pajotter.domain.*;
 
 @Entity
 <<<<<<< HEAD
+<<<<<<< HEAD
 @Table(name="berichten")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.STRING)
+=======
+@Table(name = "berichten")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+>>>>>>> origin/master
 =======
 @Table(name = "berichten")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
