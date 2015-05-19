@@ -9,14 +9,20 @@ import org.hibernate.validator.constraints.NotEmpty;
 import be.odisee.pajotter.domain.*;
 
 @Entity
+<<<<<<< HEAD
 @Table(name="berichten")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.STRING)
+=======
+@Table(name = "berichten")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+>>>>>>> origin/master
 @DiscriminatorValue("Bericht")
 public class Bericht {
 	
 		@Id
-	    @GeneratedValue(strategy=GenerationType.AUTO)
+	    @GeneratedValue(strategy = GenerationType.AUTO)
 	    protected int id;
 
 	    @Column
@@ -26,11 +32,11 @@ public class Bericht {
 	    protected String type;*/
 
 	    @Column
-	    @NotEmpty(message="Vul tekst in aub")
+	    @NotEmpty(message = "Vul tekst in aub")
 	    protected String tekst;
 
 	    @ManyToOne
-	    @JoinColumn(name="partij_id")
+	    @JoinColumn(name = "partij_id")
 	    protected Partij m_Partij;
 
 	    //@ManyToOne
@@ -45,7 +51,7 @@ public class Bericht {
 	    @JoinColumn(name="reactie_op_id")
 	    protected Bericht reactieOp;
 
-	    @OneToMany(fetch=FetchType.EAGER,mappedBy="reactieOp")
+	    @OneToMany(fetch = FetchType.EAGER, mappedBy = "reactieOp")
 	    @IndexColumn(name="id")
 	    private List<Bericht> m_Antwoorden = new ArrayList<Bericht>();
 
@@ -100,14 +106,14 @@ public class Bericht {
 
 	    public Antwoord voegAntwoordToe(int id, Partij partij, String tekst) throws Exception{
 	        Antwoord newReactie=null;
-	        newReactie= new Antwoord(id, "actief", partij, this, tekst);
+	        newReactie = new Antwoord(id, "actief", partij, this, tekst);
 	        m_Antwoorden.add(newReactie);
 	        return newReactie;
 	    }
 
 	    public Antwoord voegReactieToe(Partij partij, String tekst) throws Exception{
-	        Antwoord newReactie=null;
-	        newReactie= new Antwoord("actief", partij, this, tekst);
+	        Antwoord newReactie = null;
+	        newReactie = new Antwoord("actief", partij, this, tekst);
 	        m_Antwoorden.add(newReactie);
 	        return newReactie;
 	    }
