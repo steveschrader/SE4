@@ -39,7 +39,7 @@ public class DataConfig {
     }
  
     // Aangepast aan Hibernate 4
-   /* @Bean (destroyMethod="close")
+    @Bean (destroyMethod="close")
     public SessionFactory sessionFactory() throws Exception{
         LocalSessionFactoryBean sf = new LocalSessionFactoryBean();
         sf.setDataSource(datasource());
@@ -50,10 +50,10 @@ public class DataConfig {
         sf.setHibernateProperties(hibernateProperties);
         sf.afterPropertiesSet();                 // omdat deze configuratie wijze ...
         return (SessionFactory) sf.getObject();  // nog wat scherpe kantjes heeft
-    }*/
+    }
     
     @Bean (destroyMethod="close")
-    public SessionFactory sessionFactory() throws Exception{
+    public SessionFactory sessionFactory1() throws Exception{
     	LocalSessionFactoryBean sf = LocalSessionFactoryBean();
         return (SessionFactory) sf.getObject();  // heeft nog wat scherpe kantjes
     }

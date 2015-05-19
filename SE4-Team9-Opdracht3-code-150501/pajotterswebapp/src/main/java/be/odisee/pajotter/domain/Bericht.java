@@ -1,19 +1,17 @@
 package be.odisee.pajotter.domain;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.*;
-
 import org.hibernate.annotations.IndexColumn;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import be.odisee.pajotter.domain.*;
 
 @Entity
 @Table(name="berichten")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type",discriminatorType=DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("Bericht")
 public class Bericht {
 	
@@ -60,7 +58,7 @@ public class Bericht {
 	        this.m_Partij = m_Partij;
 	        this.tekst = tekst;
 	        
-	       // this.setType(type);
+	        //this.setType(type);
 	        //this.type = type;
 	        //this.onderwerp = onderwerp;
 	        //this.rangId = onderwerp.getBijdragen().size()+1;
@@ -86,7 +84,6 @@ public class Bericht {
 	        //return m_Partij.getUsernaam();
 	        return ""+ m_Partij.getId();
 	    }
-
 	    
 	    //Om een antwoord te kunnen geven
 	    public int getReactieOpBijdrageId() {
@@ -131,8 +128,6 @@ public class Bericht {
 	        this.m_Antwoorden = m_Antwoorden;
 	    }
 
-	   
-
 	    public void setReactieOp(Bericht reactieOp) {
 	        this.reactieOp = reactieOp;
 	    }
@@ -144,7 +139,6 @@ public class Bericht {
 	    public void setTekst(String tekst) {
 	        this.tekst = tekst;
 	    }
-
 
 	    public boolean verwijderBijdrage(){
 	        /* moet nog uitgewerkt worden */

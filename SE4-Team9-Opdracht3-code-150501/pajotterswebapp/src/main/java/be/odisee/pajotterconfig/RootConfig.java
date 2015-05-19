@@ -7,8 +7,11 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import be.odisee.pajotterconfig.DataConfig;
+import be.odisee.pajotterconfig.SecurityConfig;
+
 @Configuration
-@Import(DataConfig.class)
+@Import({DataConfig.class,SecurityConfig.class})
 @ComponentScan(basePackages={"be.odisee.pajotter"}, 
     excludeFilters={
         @Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)
