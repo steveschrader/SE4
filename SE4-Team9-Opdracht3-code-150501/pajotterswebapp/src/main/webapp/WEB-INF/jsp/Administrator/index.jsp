@@ -10,6 +10,8 @@
     <body>
     	<div id="BovenPaneel">
 			<div id="Titel">
+				<h1>Welkom Administrator</h1>
+				<h4>Hier kan u de verschillende partijen beheren</h4>
 				<h1>Lijst van Partijen</h1>
 			</div>
 		</div>
@@ -17,7 +19,7 @@
 			<div id="Inhoud">
 				<ul>
 		            <c:forEach items="${partijen}" var="partij">
-		                <c:url var="partijUrl" value="/partij.html">
+		                <c:url var="partijUrl" value="/Administrator/partij.html">
 		                    <c:param name="id" value="${partij.id}" />
 		                </c:url>
 		                <li>
@@ -29,7 +31,7 @@
 		                </li>
 		            </c:forEach>
 		        </ul>
-		        <c:url var="nieuwePartijUrl" value="/nieuwePartij.html" />
+		        <c:url var="nieuwePartijUrl" value="/Administrator/nieuwePartij.html" />
 		        
 		        <div class="knoppenpaneel">
 		        	<a class="knop" href='<c:out value="${nieuwePartijUrl}"/>'>Partij Toevoegen</a>

@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-		<title>Pajotters Homepage</title>
+		<title>Pajotters Hblhkhkljhomepage   </title>
 		<link href=opmaak.css rel="stylesheet" type="text/css"/>
 	</head>
 	<body>

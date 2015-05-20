@@ -17,7 +17,7 @@
 		<div id="MiddenPaneel">
 			<div id="Inhoud">
 				<p>Vul de het onderstaande formulier in om een nieuwe teler aan te maken.</p>
-		        <c:url var="url" value="/nieuwePartij.html">
+		        <c:url var="url" value="/Administrator/nieuwePartij.html">
 		        </c:url>
 		        <form:form action="${url}" commandName="departij">   <%-- Spring form tags --%>
 			            <table>
@@ -40,7 +40,7 @@
 				            	</tr>
 				            	
 				            	<tr>
-   									<td><label for="rol">Rol4:</label></td>
+   									<td><label for="rol">Rol:</label></td>
    									
 
    									<td>
@@ -62,7 +62,7 @@
 			            
 			            <div class="knoppenpaneel">
 		                	<input class="knop" name="submit" type="submit" value="Opslaan"/>
-		                	<c:url var="home" value="/home.html" />
+		                	<c:url var="home" value="/Administrator/home.html" />
 		                	<a class="knop" href='<c:out value="${home}"/>'>Home</a>
 		                </div>
 		        </form:form>

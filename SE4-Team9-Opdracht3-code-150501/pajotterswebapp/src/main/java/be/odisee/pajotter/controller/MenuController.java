@@ -43,11 +43,19 @@ public class MenuController {
     // je zal naar accessDenied.jsp gaan
 
     @RequestMapping(value={"/","/menu.html","/index.html"},method=RequestMethod.GET)
+    @PostAuthorize("#model.get('rol').partij.emailadres == authentication.principal.username")
     public String menu(ModelMap model){
-        Partij dePartij=null;
-        dePartij = userContextService.getAuthenticatedPersoon();
+        Partij dePartij = userContextService.getAuthenticatedPersoon();
         model.addAttribute("partij",dePartij);
-        return "/menu";
+        //return "/menu";
+        Rol deRol = PajottersSessieService.zoekRolMetId(dePartij.getId());
+        model.addAttribute("rol",deRol);
+        if (deRol.getType().equals("Administrator")) return "redirect:/Administrator/index.html?rolid="+deRol.getId();
+        else if (deRol.getType().equals("Koper")) return "redirect:/koper/index.html?rolid="+deRol.getId();
+        else if (deRol.getType().equals("Teler")) return "redirect:/teler/index.html?rolid="+deRol.getId();
+        return "redirect:/brainstorm/index.html?rolid="+deRol.getId();
+        
+        
     }
     // je zal naar menu.jsp gaan
 

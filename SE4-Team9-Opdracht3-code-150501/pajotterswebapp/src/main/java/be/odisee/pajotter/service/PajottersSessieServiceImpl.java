@@ -3,7 +3,9 @@ package be.odisee.pajotter.service;
 import be.odisee.pajotter.utilities.RolNotFoundException;
 import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.dao.*;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
@@ -98,6 +100,10 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
     	rolDao.deleteRol(id);
 		
 	}
+   
+	public Partij zoekPartijMetEmailadres(String emailadres) {
+		  return partijDao.getPartijByEmailadres(emailadres);
+	}
 
     //PRODUCTIE
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
@@ -135,4 +141,6 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 		productieDao.deleteProductie(productieId);
 		
 	}
+
+	
 }

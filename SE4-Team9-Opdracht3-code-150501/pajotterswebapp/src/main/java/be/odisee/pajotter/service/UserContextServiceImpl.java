@@ -28,7 +28,7 @@ public class UserContextServiceImpl implements UserContextService {
 	    	System.out.println("DEBUG: Granted authority is "+authority.getAuthority());
 	    }
 	    Partij thePartij = null;
-	    //thePartij= pajottersSessieService.zoekPersoonMetEmailadres(username);
+	    thePartij= pajottersSessieService.zoekPartijMetEmailadres(username);
 	    return thePartij;
     }
 }
