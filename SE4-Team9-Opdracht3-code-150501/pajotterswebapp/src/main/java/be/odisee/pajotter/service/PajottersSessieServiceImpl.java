@@ -22,6 +22,10 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 	
 	private ProductieDao productieDao;
 	
+	private AanbiedingDao aanbiedingDao;
+	
+	private BestellingDao bestellingDao;
+	
 	public PajottersSessieServiceImpl(){}
 
     @Autowired
@@ -40,6 +44,18 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
     public void setProductieDao(ProductieDao productieDao)
     {
         this.productieDao = productieDao;
+    }
+    
+    @Autowired 
+    public void setAanbiedingDao(AanbiedingDao aanbiedingDao)
+    {
+        this.aanbiedingDao = aanbiedingDao;
+    }
+    
+    @Autowired 
+    public void setBestellingDao(BestellingDao bestellingDao)
+    {
+        this.bestellingDao = bestellingDao;
     }
     
     //PARTIJEN
@@ -105,7 +121,7 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 		  return partijDao.getPartijByEmailadres(emailadres);
 	}
 
-    //PRODUCTIE
+    //Productie
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
 	public Productie VoegProductieToe(String status, Partij partij, String tekst, int aantal) {
 		Productie deproductie = null;
@@ -139,6 +155,80 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 	public void verwijderProductie(int productieId) {
 		
 		productieDao.deleteProductie(productieId);
+		
+	}
+
+    //Aanbieding
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public Aanbieding VoegAanbiedingToe(String status, Partij partij, String tekst, int aantal) {
+		Aanbieding deaanbieding = null;
+		try {
+			deaanbieding = new Aanbieding(status,partij, tekst, aantal);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		aanbiedingDao.saveAanbieding(deaanbieding);
+		return deaanbieding;
+	}
+
+	public Aanbieding zoekAanbiedingMetId(int aanbiedingId) {
+		Aanbieding deaanbieding = aanbiedingDao.getAanbiedingById(aanbiedingId);
+		return deaanbieding;
+	}
+
+	@Override
+	public List<Aanbieding> geefAlleAanbiedingen() {
+		return aanbiedingDao.getAllAanbieding();
+	}
+
+	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void updateAanbieding(Aanbieding aanbieding) {
+		
+		aanbiedingDao.updateAanbieding(aanbieding);
+	}
+
+	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void verwijderAanbieding(int aanbiedingId) {
+		
+		aanbiedingDao.deleteAanbieding(aanbiedingId);
+		
+	}
+	
+    //Bestelling aan leverancier
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public Bestelling VoegBestellingToe(String status, Partij partij, String tekst, int aantal, int leverancierId) {
+		Bestelling debestelling = null;
+		try {
+			debestelling = new Bestelling(status,partij, tekst, aantal, leverancierId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		bestellingDao.saveBestelling(debestelling);
+		return debestelling;
+	}
+
+	public Bestelling zoekBestellingMetId(int Bestelling) {
+		Bestelling debestelling = bestellingDao.getBestellingById(Bestelling);
+		return debestelling;
+	}
+
+	@Override
+	public List<Bestelling> geefAlleBestellingen() {
+		return bestellingDao.getAllBestelling();
+	}
+
+	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void updateBestelling(Bestelling bestelling) {
+		
+		bestellingDao.updateBestelling(bestelling);
+	}
+
+	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void verwijderBestelling(int bestellingId) {
+		
+		bestellingDao.deleteBestelling(bestellingId);
 		
 	}
 

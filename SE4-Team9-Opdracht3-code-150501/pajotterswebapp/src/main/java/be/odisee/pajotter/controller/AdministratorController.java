@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 //@RequestMapping("/Partij")
-public class PartijController {
+public class AdministratorController {
 	
 	@Autowired
     protected PajottersSessieService pajottersSessieService = null;

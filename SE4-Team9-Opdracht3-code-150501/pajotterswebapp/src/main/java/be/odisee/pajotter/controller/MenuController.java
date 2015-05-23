@@ -72,7 +72,8 @@ public class MenuController {
         if (deRol.getType().equals("Administrator")) return "redirect:/Administrator/index.html?rolid="+deRol.getId();
         else if (deRol.getType().equals("Koper")) return "redirect:/koper/index.html?rolid="+deRol.getId();
         else if (deRol.getType().equals("Teler")) return "redirect:/teler/index.html?rolid="+deRol.getId();
-        return "redirect:/brainstorm/index.html?rolid="+deRol.getId(); // voor de andere rollen
+        else if (deRol.getType().equals("Leverancier")) return "redirect:/Leverancier/aanbiedingLijst.html?rolid="+deRol.getId();
+        return "redirect:/accessDenied.html"+deRol.getId(); // voor de andere rollen
     }
     // je zal gaan naar de pagina conform uw rol
 }

@@ -1,100 +1,145 @@
 package be.odisee.pajotter.controller;
 
-import be.odisee.pajotter.domain.Teler;
+import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.service.PajottersSessieService;
+import be.odisee.pajotter.utilities.RolNotFoundException;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
 public class TelerController {
-	
 	@Autowired
-    protected PajottersSessieService brainstormSessieService = null;
+    protected PajottersSessieService pajottersSessieService = null;
 	
-	@RequestMapping(value = {"/nieuweCoachingvraag.html"}, method = RequestMethod.GET)
-	public String coachingvraag(ModelMap model)
-	{
-		//Hier komt nog wat code
-		return "redirect:Teler/nieuweCoachingvraag.html";
-	}
-	
-	
-	//Dit is nu de partij controller geworden
-
-  /*  @Autowired
-    protected PajottersSessieService brainstormSessieService=null; // ready for dependency injection
-    //lijst van alle telers
-    @RequestMapping(value={"/home.html","/index.html","/lijst.html"}, method = RequestMethod.GET)
-    public String index(ModelMap model){
-        List<Teler> deLijst = brainstormSessieService.geefAlleTelers();
-        model.addAttribute("telers", deLijst);
-        return "/index";
-    }*/
-    // details van de teler
-
-   /* @RequestMapping(value={"/teler.html"}, method = RequestMethod.GET)
-    public String telerDetail(@RequestParam("id") Integer id, ModelMap model){
-        Teler teler = brainstormSessieService.zoekTelerMetId(id);
-        model.addAttribute("teler", teler);
-        return "/teler";
+	@RequestMapping(value={"/Teler/index.html"}, method = RequestMethod.GET)
+    public String Keuze(ModelMap model){
+        List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
+        model.addAttribute("productie", deLijst);
+        return "/Teler/index";
     }
-    // om een teler toe te voegen
-    
-    @RequestMapping(value={"/nieuweTeler.html"},method=RequestMethod.GET)
-    public String telerFormulier(ModelMap model){
-        Teler teler = new Teler();
-        model.addAttribute("deteler", teler);
-        return "/nieuweTeler";
+    //lijst van alle productie
+    @RequestMapping(value={"/Teler/productieLijst.html"}, method = RequestMethod.GET)
+    public String indexProductie(ModelMap model){
+        List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
+        model.addAttribute("productie", deLijst);
+        return "/Teler/productieLijst";
     }
     
-    //om de teler te verwijderen
-    @RequestMapping(value={"/verwijderTeler.html"},method=RequestMethod.GET)
-    public String telerDelete(@RequestParam("id") Integer id, ModelMap model){
-        brainstormSessieService.verwijderTeler(id);
-        List<Teler> deLijst = brainstormSessieService.geefAlleTelers();
-        model.addAttribute("telers", deLijst);
-        return "/index";
-    }
-    //om de teler up te daten
-    @RequestMapping(value={"/updateTeler.html"},method=RequestMethod.POST)
-    public String telerUpdate(@ModelAttribute("deteler") Teler teler, ModelMap model){
-    	brainstormSessieService.updateTeler(teler);
-        model.addAttribute("teler", teler);
-        return "/teler";
-    }
-    //om naar de update pagina te gaan en de teler info mee te geven
-    @RequestMapping(value={"/updateTeler.html"},method=RequestMethod.GET)
-    public String telerEditpagina(@RequestParam("id") Integer id, ModelMap model){
-    	Teler teler = brainstormSessieService.zoekTelerMetId(id);
-        model.addAttribute("deteler", teler);
-        return "/editTeler";
+    //details van de producite
+    @RequestMapping(value={"/Teler/productie.html"}, method = RequestMethod.GET)
+    public String productieDetail(@RequestParam("id") Integer id, ModelMap model) {
+        Productie productie = pajottersSessieService.zoekProductieMetId(id);
+        model.addAttribute("productie", productie);
+        return "/Teler/productie";
     }
     
-    // nieuwe teler te maken
-
-    @RequestMapping(value={"/nieuweTeler.html"},method=RequestMethod.POST)
-    public String telerToevoegen(@ModelAttribute("deteler") Teler teler, ModelMap model){
-        Teler toegevoegdTeler = brainstormSessieService.voegTelerToe(teler.getVoornaam(),
-                                                                            teler.getFamilienaam(),
-                                                                            teler.getEmailadres(),
-                                                                            teler.getPaswoord(),
-                                                                            teler.getAdres(),
-                                                                            teler.getTelefoon());
-        System.out.println("DEBUG telergegevens familienaam: " + teler.getFamilienaam());
-        return "redirect:teler.html?id=" + toegevoegdTeler.getId();
+    //om een productie toe te voegen
+    @RequestMapping(value={"/Teler/nieuweProductie.html"}, method = RequestMethod.GET)
+    public String productieFormulier(ModelMap model) {
+        Productie productie = new Productie();
+        model.addAttribute("deproductie", productie);
+        return "/Teler/nieuweProductie";
     }
     
-    @RequestMapping(value={"/jquery.js"},method=RequestMethod.GET)
-    public String geefjQuery() {
-    	return "/jquery-2.1.3.min.js";
+    //om de productie te verwijderen
+    @RequestMapping(value={"/Teler/verwijderProductie.html"}, method = RequestMethod.GET)
+    public String productieDelete(@RequestParam("id") Integer id, ModelMap model) {
+        pajottersSessieService.verwijderProductie(id);
+        List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
+        model.addAttribute("productie", deLijst);
+        return "/Teler/productieLijst";
     }
     
-    @RequestMapping(value={"/opmaak.css"},method=RequestMethod.GET)
-    public String geefCss() {
-    	return "/Opmaak.css";
-    }*/
+    //om de productie up te daten
+    @RequestMapping(value={"/Teler/updateProductie.html"}, method = RequestMethod.POST)
+    public String productieUpdate(@ModelAttribute("deproductie") @Valid Productie productie, BindingResult result, ModelMap model){
+    	pajottersSessieService.updateProductie(productie);
+        model.addAttribute("productie", productie);
+        return "/Teler/productie";
+    }
+    
+    //om naar de update pagina te gaan en de productie info mee te geven
+    @RequestMapping(value={"/Teler/updateProductie.html"}, method = RequestMethod.GET)
+    public String telerEditpagina(@RequestParam("id") Integer id, ModelMap model) {
+    	Productie productie = pajottersSessieService.zoekProductieMetId(id);
+        model.addAttribute("deproductie", productie);
+        return "/Teler/editProductie";
+    }
+    
+    //nieuwe productie te maken
+    @RequestMapping(value={"/Teler/nieuweProductie.html"}, method = RequestMethod.POST)
+    public String producteiToevoegen(@ModelAttribute("deproductie") @Valid Productie productie, BindingResult result, ModelMap model, @RequestParam int PartijId){
+    	if (result.hasErrors()) return "/Teler/nieuweProductie"; 
+    	Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
+    	Productie toegevoegdProductie = pajottersSessieService.VoegProductieToe("actief",partijDatVerzend, productie.getTekst(), productie.getAantal());
+        System.out.println("DEBUG ProductieGegevens Tekstst: " + productie.getTekst() );
+        return "redirect:/Teler/productie.html?id=" + toegevoegdProductie.getId();
+    }
+    
+    //---------------------------------------------BESTELLING-----------------------------------------------------------------
+    
+    //lijst van alle bestelling
+    @RequestMapping(value={"/Teler/bestellingLijst.html"}, method = RequestMethod.GET)
+    public String indexBestelling(ModelMap model){
+        List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen();
+        model.addAttribute("bestelling", deLijst);
+        return "/Teler/bestellingLijst";
+    }
+    
+    //details van de producite
+    @RequestMapping(value={"/Teler/bestelling.html"}, method = RequestMethod.GET)
+    public String bestellingDetail(@RequestParam("id") Integer id, ModelMap model) {
+        Bestelling bestelling = pajottersSessieService.zoekBestellingMetId(id);
+        model.addAttribute("bestelling", bestelling);
+        return "/Teler/bestelling";
+    }
+    
+    //om een bestelling toe te voegen
+    @RequestMapping(value={"/Teler/nieuweBestelling.html"}, method = RequestMethod.GET)
+    public String bestellingFormulier(ModelMap model) {
+        Bestelling bestelling = new Bestelling();
+        model.addAttribute("debestelling", bestelling);
+        return "/Teler/nieuweBestelling";
+    }
+    
+    //om de bestelling te verwijderen
+    @RequestMapping(value={"/Teler/verwijderBestelling.html"}, method = RequestMethod.GET)
+    public String bestellingDelete(@RequestParam("id") Integer id, ModelMap model) {
+        pajottersSessieService.verwijderBestelling(id);
+        List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen();
+        model.addAttribute("bestelling", deLijst);
+        return "/Teler/bestellingLijst";
+    }
+    
+    //om de bestelling up te daten
+    @RequestMapping(value={"/Teler/updateBestelling.html"}, method = RequestMethod.POST)
+    public String bestellingUpdate(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model){
+    	pajottersSessieService.updateBestelling(bestelling);
+        model.addAttribute("bestelling", bestelling);
+        return "/Teler/bestelling";
+    }
+    
+    //om naar de update pagina te gaan en de bestelling info mee te geven
+    @RequestMapping(value={"/Teler/updateBestelling.html"}, method = RequestMethod.GET)
+    public String bestellingEditpagina(@RequestParam("id") Integer id, ModelMap model) {
+    	Bestelling bestelling = pajottersSessieService.zoekBestellingMetId(id);
+        model.addAttribute("debestelling", bestelling);
+        return "/Teler/editBestelling";
+    }
+    
+    //nieuwe bestelling te maken
+    @RequestMapping(value={"/Teler/nieuweBestelling.html"}, method = RequestMethod.POST)
+    public String producteiToevoegen(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model, @RequestParam int PartijId){
+    	if (result.hasErrors()) return "/Teler/nieuweBestelling"; 
+    	Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
+    	Bestelling toegevoegdBestelling = pajottersSessieService.VoegBestellingToe("actief",partijDatVerzend, bestelling.getTekst(), bestelling.getAantal(), bestelling.getLeverancierId());
+        System.out.println("DEBUG BestellingGegevens Tekstst: " + bestelling.getTekst() );
+        return "redirect:/Teler/bestelling.html?id=" + toegevoegdBestelling.getId();
+    }
 }
