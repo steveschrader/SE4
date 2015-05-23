@@ -57,6 +57,7 @@ public class MenuController {
         //return "/menu";
         Rol deRol = PajottersSessieService.zoekRolMetId(dePartij.getId());
         model.addAttribute("rol",deRol);
+
         if (deRol.getType().equals("Administrator"))
         	return "redirect:/Administrator/index.html?rolid=" + deRol.getId();
         else if (deRol.getType().equals("Koper"))

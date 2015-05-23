@@ -9,7 +9,7 @@ public interface ProductieDao {
 
     public Productie getProductieById(int productieId);
 
-    public List<Productie> getAllProductie();
+    public List<Productie> getAllProductie(int id);
 
     public void updateProductie(Productie productie);
     

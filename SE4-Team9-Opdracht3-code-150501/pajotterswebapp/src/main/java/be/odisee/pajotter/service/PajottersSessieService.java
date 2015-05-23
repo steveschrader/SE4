@@ -40,7 +40,7 @@ public interface PajottersSessieService {
 
     public Productie zoekProductieMetId(int productieId);
 
-    public List<Productie> geefAlleProductie();
+    public List<Productie> geefAlleProductie(int id);
 
     public void updateProductie(Productie productie);
     
@@ -51,7 +51,7 @@ public interface PajottersSessieService {
 
     public Aanbieding zoekAanbiedingMetId(int aanbiedingId);
 
-    public List<Aanbieding> geefAlleAanbiedingen();
+    public List<Aanbieding> geefAlleAanbiedingen(int id);
 
     public void updateAanbieding(Aanbieding aanbieding);
     
@@ -62,7 +62,7 @@ public interface PajottersSessieService {
 
     public Bestelling zoekBestellingMetId(int bestellingId);
 
-    public List<Bestelling> geefAlleBestellingen();
+    public List<Bestelling> geefAlleBestellingen(int id, String Columnname);
 
     public void updateBestelling(Bestelling bestelling);
     

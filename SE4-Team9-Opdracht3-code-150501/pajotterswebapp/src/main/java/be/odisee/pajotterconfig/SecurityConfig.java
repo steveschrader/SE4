@@ -44,9 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/logout*").permitAll()
 			.antMatchers("/logoutSuccess*").permitAll()
 			.antMatchers("/accessDenied*").permitAll()
-			.antMatchers("/Opmaak*").permitAll()
 			.antMatchers("/Administrator/**").hasAuthority("Administrator")
 			.antMatchers("/Koper/**").hasAuthority("Koper")
+			/*onderstaande regel in commentaar leidt tot niets*/
+			/*.antMatchers("/Pajotters/**").hasAnyAuthority("Administrator","Koper", "Leverancier", "Teler")*/
 			.antMatchers("/Pajotter/**").hasAnyAuthority("Pajotter")
 			.antMatchers("/Leverancier/**").hasAuthority("Leverancier")
 			.antMatchers("/Bestelling/**").hasAnyAuthority("Industrie", "Koper", "Teler")

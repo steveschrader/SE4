@@ -11,7 +11,7 @@ public interface AanbiedingDao {
 
     public Aanbieding getAanbiedingById(int aanbiedingId);
 
-    public List<Aanbieding> getAllAanbieding();
+    public List<Aanbieding> getAllAanbieding(int id);
 
     public void updateAanbieding(Aanbieding aanbieding);
     

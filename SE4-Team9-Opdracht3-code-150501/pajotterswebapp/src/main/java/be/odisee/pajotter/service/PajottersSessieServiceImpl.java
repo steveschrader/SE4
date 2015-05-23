@@ -141,8 +141,8 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 	}
 
 	@Override
-	public List<Productie> geefAlleProductie() {
-		return productieDao.getAllProductie();
+	public List<Productie> geefAlleProductie(int id) {
+		return productieDao.getAllProductie(id);
 	}
 
 	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
@@ -178,8 +178,8 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 	}
 
 	@Override
-	public List<Aanbieding> geefAlleAanbiedingen() {
-		return aanbiedingDao.getAllAanbieding();
+	public List<Aanbieding> geefAlleAanbiedingen(int id) {
+		return aanbiedingDao.getAllAanbieding(id);
 	}
 
 	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
@@ -215,8 +215,8 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 	}
 
 	@Override
-	public List<Bestelling> geefAlleBestellingen() {
-		return bestellingDao.getAllBestelling();
+	public List<Bestelling> geefAlleBestellingen(int id, String Columnname) {
+		return bestellingDao.getAllBestelling(id, Columnname);
 	}
 
 	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)

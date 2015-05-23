@@ -33,8 +33,9 @@ public class AanbiedingHibernateDao extends HibernateDao implements AanbiedingDa
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Aanbieding> getAllAanbieding() {
-		return (List<Aanbieding>) sessionGetAllObjects("Aanbieding");
+	public List<Aanbieding> getAllAanbieding(int id) {
+		//return (List<Aanbieding>) sessionGetAllObjects("Aanbieding");
+		return (List<Aanbieding>) sessionGetAllObjectsBySpecificId("Aanbieding", "partij_id", id);
 	}
 
 	@Override

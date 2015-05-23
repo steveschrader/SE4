@@ -24,6 +24,8 @@
 		                    <a href='<c:out value="${bestellingUrl}"/>'>
 		                        <c:out value="${bestelling.aantal}" />
 		                        <c:out value="${bestelling.tekst}" />
+		                    
+		                        
 		                        
 		                    </a>
 		                </li>
@@ -31,9 +33,6 @@
 		        </ul>
 		        <c:url var="nieuweBestellingUrl" value="nieuweBestelling.html" />
 		        
-		        <div class="knoppenpaneel">
-		        	<a class="knop" href='<c:out value="${nieuweBestellingUrl}"/>'>Bestelling Toevoegen</a>
-		        </div>
 		        <c:url var="index" value="/Teler/index.html" />
 		        
 		        <div class="knoppenpaneel">

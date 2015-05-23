@@ -29,13 +29,13 @@
 		        	
 		        </table>
 		        
-		        <c:url var="VerwijderproductieUrl" value="/verwijderProductie.html">
+		        <c:url var="VerwijderproductieUrl" value="/Teler/verwijderProductie.html">
 					<c:param name="id" value="${productie.id}" />
 		        </c:url>
 		        
-		        <c:url var="home" value="/productieLijst.html" />
+		        <c:url var="home" value="/Teler/productieLijst.html" />
 		        
-		        <c:url var="updateproductieUrl" value="/updateProductie.html">
+		        <c:url var="updateproductieUrl" value="/Teler/updateProductie.html">
 					<c:param name="id" value="${productie.id}" />
 		        </c:url>
 		        

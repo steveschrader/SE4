@@ -1,7 +1,7 @@
 package be.odisee.pajotter.controller;
 
 import be.odisee.pajotter.domain.*;
-import be.odisee.pajotter.service.PajottersSessieService;
+import be.odisee.pajotter.service.*;
 import be.odisee.pajotter.utilities.RolNotFoundException;
 import java.util.List;
 import javax.validation.Valid;
@@ -19,14 +19,16 @@ public class TelerController {
 	
 	@RequestMapping(value={"/index.html"}, method = RequestMethod.GET)
     public String Keuze(ModelMap model){
-        List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
+		Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Productie> deLijst = pajottersSessieService.geefAlleProductie(partij.getId());
         model.addAttribute("productie", deLijst);
         return "/Teler/index";
     }
     //lijst van alle productie
     @RequestMapping(value={"/productieLijst.html"}, method = RequestMethod.GET)
     public String indexProductie(ModelMap model){
-        List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
+		Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Productie> deLijst = pajottersSessieService.geefAlleProductie(partij.getId());
         model.addAttribute("productie", deLijst);
         return "/Teler/productieLijst";
     }
@@ -51,7 +53,8 @@ public class TelerController {
     @RequestMapping(value={"/verwijderProductie.html"}, method = RequestMethod.GET)
     public String productieDelete(@RequestParam("id") Integer id, ModelMap model) {
         pajottersSessieService.verwijderProductie(id);
-        List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
+		Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Productie> deLijst = pajottersSessieService.geefAlleProductie(partij.getId());
         model.addAttribute("productie", deLijst);
         return "/Teler/productieLijst";
     }
@@ -87,7 +90,8 @@ public class TelerController {
     //lijst van alle bestelling
     @RequestMapping(value={"/bestellingLijst.html"}, method = RequestMethod.GET)
     public String indexBestelling(ModelMap model){
-        List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen();
+    	Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen(partij.getId(), "partij_id");
         model.addAttribute("bestelling", deLijst);
         return "/Teler/bestellingLijst";
     }
@@ -112,7 +116,8 @@ public class TelerController {
     @RequestMapping(value={"/verwijderBestelling.html"}, method = RequestMethod.GET)
     public String bestellingDelete(@RequestParam("id") Integer id, ModelMap model) {
         pajottersSessieService.verwijderBestelling(id);
-        List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen();
+    	Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen(partij.getId(), "partij_id");
         model.addAttribute("bestelling", deLijst);
         return "/Teler/bestellingLijst";
     }
@@ -137,7 +142,8 @@ public class TelerController {
     @RequestMapping(value={"/nieuweBestelling.html"}, method = RequestMethod.POST)
     public String producteiToevoegen(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model, @RequestParam int PartijId){
     	if (result.hasErrors()) return "/Teler/nieuweBestelling"; 
-    	Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
+    	//Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
+    	Partij partijDatVerzend = userContextService.getAuthenticatedPersoon();
     	Bestelling toegevoegdBestelling = pajottersSessieService.VoegBestellingToe("actief",partijDatVerzend, bestelling.getTekst(), bestelling.getAantal(), bestelling.getLeverancierId());
         System.out.println("DEBUG BestellingGegevens Tekstst: " + bestelling.getTekst() );
         return "redirect:/Teler/bestelling.html?id=" + toegevoegdBestelling.getId();

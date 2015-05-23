@@ -11,7 +11,7 @@ public interface BestellingDao {
 
     public Bestelling getBestellingById(int bestellingId);
 
-    public List<Bestelling> getAllBestelling();
+    public List<Bestelling> getAllBestelling(int id, String columnname);
 
     public void updateBestelling(Bestelling bestelling);
     

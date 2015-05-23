@@ -17,7 +17,7 @@
 			<div id="Inhoud">
 				<ul>
 		            <c:forEach items="${productie}" var="productie">
-		                <c:url var="productieUrl" value="/productie.html">
+		                <c:url var="productieUrl" value="/Teler/productie.html">
 		                    <c:param name="id" value="${productie.id}" />
 		                </c:url>
 		                <li>
@@ -29,10 +29,12 @@
 		                </li>
 		            </c:forEach>
 		        </ul>
-		        <c:url var="nieuweProductieUrl" value="nieuweProductie.html" />
+		        <c:url var="nieuweProductieUrl" value="/Teler/nieuweProductie.html" />
 		        
 		        <div class="knoppenpaneel">
 		        	<a class="knop" href='<c:out value="${nieuweProductieUrl}"/>'>Productie Toevoegen</a>
+		        	<c:url var="home" value="/Teler/index.html" />
+		                	<a class="knop" href='<c:out value="${home}"/>'>Home</a>
 		        </div>
 			</div>
 		</div>
