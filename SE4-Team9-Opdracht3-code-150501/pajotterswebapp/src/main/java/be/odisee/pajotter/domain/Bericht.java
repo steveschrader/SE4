@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import be.odisee.pajotter.domain.*;
 
 @Entity
+
 @Table(name = "berichten")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)

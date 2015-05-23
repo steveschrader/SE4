@@ -1,8 +1,11 @@
 package be.odisee.pajotter.dao;
 
 import org.hibernate.*;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import be.odisee.pajotter.domain.Teler;
 
 public class HibernateDao {
@@ -142,4 +145,14 @@ public class HibernateDao {
             e.printStackTrace();
         }
     }
+    protected Object sessionGetObjectByStringParameterValue(String classname, String parameter, String value){
+        Object result = null;
+        try{
+            result = sessionFactory.getCurrentSession().createQuery("from "+classname+" where "+parameter+"='"+value+"'").uniqueResult();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }    
 }

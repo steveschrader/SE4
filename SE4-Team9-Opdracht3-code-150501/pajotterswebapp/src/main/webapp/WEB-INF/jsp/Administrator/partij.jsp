@@ -38,13 +38,13 @@
 		        	
 		        </table>
 		        
-		        <c:url var="VerwijderpartijUrl" value="/verwijderPartij.html">
+		        <c:url var="VerwijderpartijUrl" value="/Administrator/verwijderPartij.html">
 					<c:param name="id" value="${partij.id}" />
 		        </c:url>
 		        
-		        <c:url var="home" value="/home.html" />
+		        <c:url var="home" value="/Administrator/home.html" />
 		        
-		        <c:url var="updatepartijUrl" value="/updatePartij.html">
+		        <c:url var="updatepartijUrl" value="/Administrator/updatePartij.html">
 					<c:param name="id" value="${partij.id}" />
 		        </c:url>
 		        

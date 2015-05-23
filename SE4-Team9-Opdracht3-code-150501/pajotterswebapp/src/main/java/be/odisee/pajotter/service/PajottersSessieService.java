@@ -1,7 +1,9 @@
 package be.odisee.pajotter.service;
 
+
 import be.odisee.pajotter.utilities.RolNotFoundException;
 import be.odisee.pajotter.domain.*;
+
 import java.util.List;
 
 public interface PajottersSessieService {
@@ -18,6 +20,8 @@ public interface PajottersSessieService {
     public void updatePartij(Partij partijid);
 
     public List<Partij> geefAllePartijen();
+    
+    public Partij zoekPartijMetEmailadres(String username);
     
     	//Toevoegen van rollen aan partijen
     

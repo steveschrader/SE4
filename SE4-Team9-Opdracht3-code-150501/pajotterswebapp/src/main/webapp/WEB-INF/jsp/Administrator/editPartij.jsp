@@ -24,7 +24,7 @@
 		<div id="MiddenPaneel">
 			<div id="Inhoud">
 				<p>Bewerk de onderstaande velden naar believen en klik op opslaan.
-				<c:url var="url" value="/updatePartij.html" />
+				<c:url var="url" value="/Administrator/updatePartij.html" />
 				<form:form method="POST" commandName="departij" action="${url}">
 					<table>
 						<tbody>
@@ -69,7 +69,7 @@
 					
 					<div class="knoppenpaneel">
 						<input class="knop" name="submit" type="submit" value="Opslaan" />
-						<c:url var="home" value="/home.html" />
+						<c:url var="home" value="/Administrator/home.html" />
 						<a class="knop" href='<c:out value="${home}"/>'>Annuleren</a>
 					</div>
 				</form:form>
