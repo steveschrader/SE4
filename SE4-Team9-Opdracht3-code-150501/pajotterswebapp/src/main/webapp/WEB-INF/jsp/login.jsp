@@ -13,6 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Pajotter Login</title>
+        <link href=opmaak.css rel="stylesheet"/>
     </head>
     <body>
         <h1>Login aub</h1>

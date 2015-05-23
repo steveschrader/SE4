@@ -40,11 +40,20 @@ public class MenuController {
     }
     // je zal naar accessDenied.jsp gaan
 
+    @RequestMapping(value={"/jquery.js","/jquery"}, method = RequestMethod.GET)
+    public String jquery(ModelMap model){
+    	return "js/jquery-2.1.3.min.js";
+    }
+    @RequestMapping(value={"/opmaak.css","/opmaak"}, method = RequestMethod.GET)
+    public String opmaak(ModelMap model){
+    	return "css/Opmaak.css";
+    }
+    
     @RequestMapping(value={"/","/menu.html","/index.html"}, method = RequestMethod.GET)
     @PostAuthorize("#model.get('rol').partij.emailadres == authentication.principal.username")
     public String menu(ModelMap model){
         Partij dePartij = userContextService.getAuthenticatedPersoon();
-        model.addAttribute("partij",dePartij);
+        model.addAttribute("partij", dePartij);
         //return "/menu";
         Rol deRol = PajottersSessieService.zoekRolMetId(dePartij.getId());
         model.addAttribute("rol",deRol);
@@ -60,7 +69,7 @@ public class MenuController {
         	return "redirect:/Industrie/index.html?rolid=" + deRol.getId();
         else if (deRol.getType().equals("Pajotter"))
         	return "redirect:/Pajotter/index.html?rolid=" + deRol.getId();
-        return "/accesDenied";
+        return "opmaak.css";
     }
 
     //Deze methode wordt dus nooit gebruikt omdat elke partij maar één rol kan hebben tot nu toe

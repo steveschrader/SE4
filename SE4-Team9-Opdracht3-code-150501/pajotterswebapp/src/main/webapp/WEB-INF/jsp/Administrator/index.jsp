@@ -36,6 +36,11 @@
 		        <div class="knoppenpaneel">
 		        	<a class="knop" href='<c:out value="${nieuwePartijUrl}"/>'>Partij Toevoegen</a>
 		        </div>
+		        
+		        <form class="form-inline" action="/Pajotters/logout" method="post">
+					<input type="submit" value="Log out" />
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			    </form>
 			</div>
 		</div>
     </body>

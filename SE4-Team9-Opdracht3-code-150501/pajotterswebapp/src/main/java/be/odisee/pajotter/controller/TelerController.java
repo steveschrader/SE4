@@ -12,19 +12,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/Teler")
 public class TelerController {
 	@Autowired
     protected PajottersSessieService pajottersSessieService = null;
 	
-	@RequestMapping(value={"/Teler/index.html"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/index.html"}, method = RequestMethod.GET)
     public String Keuze(ModelMap model){
         List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
         model.addAttribute("productie", deLijst);
         return "/Teler/index";
     }
     //lijst van alle productie
-    @RequestMapping(value={"/Teler/productieLijst.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/productieLijst.html"}, method = RequestMethod.GET)
     public String indexProductie(ModelMap model){
         List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
         model.addAttribute("productie", deLijst);
@@ -32,7 +32,7 @@ public class TelerController {
     }
     
     //details van de producite
-    @RequestMapping(value={"/Teler/productie.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/productie.html"}, method = RequestMethod.GET)
     public String productieDetail(@RequestParam("id") Integer id, ModelMap model) {
         Productie productie = pajottersSessieService.zoekProductieMetId(id);
         model.addAttribute("productie", productie);
@@ -40,7 +40,7 @@ public class TelerController {
     }
     
     //om een productie toe te voegen
-    @RequestMapping(value={"/Teler/nieuweProductie.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/nieuweProductie.html"}, method = RequestMethod.GET)
     public String productieFormulier(ModelMap model) {
         Productie productie = new Productie();
         model.addAttribute("deproductie", productie);
@@ -48,7 +48,7 @@ public class TelerController {
     }
     
     //om de productie te verwijderen
-    @RequestMapping(value={"/Teler/verwijderProductie.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/verwijderProductie.html"}, method = RequestMethod.GET)
     public String productieDelete(@RequestParam("id") Integer id, ModelMap model) {
         pajottersSessieService.verwijderProductie(id);
         List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
@@ -57,7 +57,7 @@ public class TelerController {
     }
     
     //om de productie up te daten
-    @RequestMapping(value={"/Teler/updateProductie.html"}, method = RequestMethod.POST)
+    @RequestMapping(value={"/updateProductie.html"}, method = RequestMethod.POST)
     public String productieUpdate(@ModelAttribute("deproductie") @Valid Productie productie, BindingResult result, ModelMap model){
     	pajottersSessieService.updateProductie(productie);
         model.addAttribute("productie", productie);
@@ -65,7 +65,7 @@ public class TelerController {
     }
     
     //om naar de update pagina te gaan en de productie info mee te geven
-    @RequestMapping(value={"/Teler/updateProductie.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/updateProductie.html"}, method = RequestMethod.GET)
     public String telerEditpagina(@RequestParam("id") Integer id, ModelMap model) {
     	Productie productie = pajottersSessieService.zoekProductieMetId(id);
         model.addAttribute("deproductie", productie);
@@ -73,7 +73,7 @@ public class TelerController {
     }
     
     //nieuwe productie te maken
-    @RequestMapping(value={"/Teler/nieuweProductie.html"}, method = RequestMethod.POST)
+    @RequestMapping(value={"/nieuweProductie.html"}, method = RequestMethod.POST)
     public String producteiToevoegen(@ModelAttribute("deproductie") @Valid Productie productie, BindingResult result, ModelMap model, @RequestParam int PartijId){
     	if (result.hasErrors()) return "/Teler/nieuweProductie"; 
     	Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
@@ -85,7 +85,7 @@ public class TelerController {
     //---------------------------------------------BESTELLING-----------------------------------------------------------------
     
     //lijst van alle bestelling
-    @RequestMapping(value={"/Teler/bestellingLijst.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/bestellingLijst.html"}, method = RequestMethod.GET)
     public String indexBestelling(ModelMap model){
         List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen();
         model.addAttribute("bestelling", deLijst);
@@ -93,7 +93,7 @@ public class TelerController {
     }
     
     //details van de producite
-    @RequestMapping(value={"/Teler/bestelling.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/bestelling.html"}, method = RequestMethod.GET)
     public String bestellingDetail(@RequestParam("id") Integer id, ModelMap model) {
         Bestelling bestelling = pajottersSessieService.zoekBestellingMetId(id);
         model.addAttribute("bestelling", bestelling);
@@ -101,7 +101,7 @@ public class TelerController {
     }
     
     //om een bestelling toe te voegen
-    @RequestMapping(value={"/Teler/nieuweBestelling.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/nieuweBestelling.html"}, method = RequestMethod.GET)
     public String bestellingFormulier(ModelMap model) {
         Bestelling bestelling = new Bestelling();
         model.addAttribute("debestelling", bestelling);
@@ -109,7 +109,7 @@ public class TelerController {
     }
     
     //om de bestelling te verwijderen
-    @RequestMapping(value={"/Teler/verwijderBestelling.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/verwijderBestelling.html"}, method = RequestMethod.GET)
     public String bestellingDelete(@RequestParam("id") Integer id, ModelMap model) {
         pajottersSessieService.verwijderBestelling(id);
         List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen();
@@ -118,7 +118,7 @@ public class TelerController {
     }
     
     //om de bestelling up te daten
-    @RequestMapping(value={"/Teler/updateBestelling.html"}, method = RequestMethod.POST)
+    @RequestMapping(value={"/updateBestelling.html"}, method = RequestMethod.POST)
     public String bestellingUpdate(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model){
     	pajottersSessieService.updateBestelling(bestelling);
         model.addAttribute("bestelling", bestelling);
@@ -126,7 +126,7 @@ public class TelerController {
     }
     
     //om naar de update pagina te gaan en de bestelling info mee te geven
-    @RequestMapping(value={"/Teler/updateBestelling.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/updateBestelling.html"}, method = RequestMethod.GET)
     public String bestellingEditpagina(@RequestParam("id") Integer id, ModelMap model) {
     	Bestelling bestelling = pajottersSessieService.zoekBestellingMetId(id);
         model.addAttribute("debestelling", bestelling);
@@ -134,7 +134,7 @@ public class TelerController {
     }
     
     //nieuwe bestelling te maken
-    @RequestMapping(value={"/Teler/nieuweBestelling.html"}, method = RequestMethod.POST)
+    @RequestMapping(value={"/nieuweBestelling.html"}, method = RequestMethod.POST)
     public String producteiToevoegen(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model, @RequestParam int PartijId){
     	if (result.hasErrors()) return "/Teler/nieuweBestelling"; 
     	Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
