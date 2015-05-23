@@ -45,4 +45,15 @@ public interface PajottersSessieService {
     public void updateProductie(Productie productie);
     
     public void verwijderProductie(int productieID);
+    
+  //Aanbieding aanbieden
+    public Aanbieding VoegAanbiedingToe(String status, Partij partij, String tekst, int aantal);
+
+    public Aanbieding zoekAanbiedingMetId(int aanbiedingId);
+
+    public List<Aanbieding> geefAlleAanbiedingen();
+
+    public void updateAanbieding(Aanbieding aanbieding);
+    
+    public void verwijderAanbieding(int aanbiedingID);
 }
