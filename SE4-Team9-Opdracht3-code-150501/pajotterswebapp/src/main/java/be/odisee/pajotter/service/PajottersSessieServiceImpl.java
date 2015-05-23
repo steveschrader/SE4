@@ -24,6 +24,8 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 	
 	private AanbiedingDao aanbiedingDao;
 	
+	private BestellingDao bestellingDao;
+	
 	public PajottersSessieServiceImpl(){}
 
     @Autowired
@@ -48,6 +50,12 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
     public void setAanbiedingDao(AanbiedingDao aanbiedingDao)
     {
         this.aanbiedingDao = aanbiedingDao;
+    }
+    
+    @Autowired 
+    public void setBestellingDao(BestellingDao bestellingDao)
+    {
+        this.bestellingDao = bestellingDao;
     }
     
     //PARTIJEN
@@ -184,6 +192,43 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 	public void verwijderAanbieding(int aanbiedingId) {
 		
 		aanbiedingDao.deleteAanbieding(aanbiedingId);
+		
+	}
+	
+    //Bestelling aan leverancier
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public Bestelling VoegBestellingToe(String status, Partij partij, String tekst, int aantal, int leverancierId) {
+		Bestelling debestelling = null;
+		try {
+			debestelling = new Bestelling(status,partij, tekst, aantal, leverancierId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		bestellingDao.saveBestelling(debestelling);
+		return debestelling;
+	}
+
+	public Bestelling zoekBestellingMetId(int Bestelling) {
+		Bestelling debestelling = bestellingDao.getBestellingById(Bestelling);
+		return debestelling;
+	}
+
+	@Override
+	public List<Bestelling> geefAlleBestellingen() {
+		return bestellingDao.getAllBestelling();
+	}
+
+	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void updateBestelling(Bestelling bestelling) {
+		
+		bestellingDao.updateBestelling(bestelling);
+	}
+
+	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void verwijderBestelling(int bestellingId) {
+		
+		bestellingDao.deleteBestelling(bestellingId);
 		
 	}
 

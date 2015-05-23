@@ -13,13 +13,20 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
-public class AanbiedingController {
+public class LeverancierController {
 	@Autowired
     protected PajottersSessieService pajottersSessieService = null;
 	
-    //lijst van alle aanbieding
-    @RequestMapping(value={"/Leverancier/aanbiedingLijst.html","/Leverancier/index.html"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/Leverancier/index.html"}, method = RequestMethod.GET)
     public String index(ModelMap model){
+        List<Aanbieding> deLijst = pajottersSessieService.geefAlleAanbiedingen();
+        model.addAttribute("aanbieding", deLijst);
+        return "/Leverancier/index";
+    }
+	
+    //lijst van alle aanbieding
+    @RequestMapping(value={"/Leverancier/aanbiedingLijst.html"}, method = RequestMethod.GET)
+    public String Lijst(ModelMap model){
         List<Aanbieding> deLijst = pajottersSessieService.geefAlleAanbiedingen();
         model.addAttribute("aanbieding", deLijst);
         return "/Leverancier/aanbiedingLijst";

@@ -56,4 +56,15 @@ public interface PajottersSessieService {
     public void updateAanbieding(Aanbieding aanbieding);
     
     public void verwijderAanbieding(int aanbiedingID);
+    
+  //Bestelling aan leverancier
+    public Bestelling VoegBestellingToe(String status, Partij partij, String tekst, int aantal, int LeverancierId);
+
+    public Bestelling zoekBestellingMetId(int bestellingId);
+
+    public List<Bestelling> geefAlleBestellingen();
+
+    public void updateBestelling(Bestelling bestelling);
+    
+    public void verwijderBestelling(int bestellingID);
 }

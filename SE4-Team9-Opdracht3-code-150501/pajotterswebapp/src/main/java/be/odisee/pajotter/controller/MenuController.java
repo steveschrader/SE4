@@ -59,6 +59,7 @@ public class MenuController {
         
     }
     // je zal naar menu.jsp gaan
+    //Dit word niet meer gebruikt
 
     @RequestMapping(value={"/rol.html"},method=RequestMethod.GET)
     @PostAuthorize("#model.get('rol').partij.emailadres == authentication.principal.username")
