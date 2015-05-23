@@ -1,12 +1,9 @@
 package be.odisee.pajotter.dao;
 
 import org.hibernate.*;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-import be.odisee.pajotter.domain.Teler;
+//import be.odisee.pajotter.domain.Teler;
 
 public class HibernateDao {
 

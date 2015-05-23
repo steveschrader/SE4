@@ -32,7 +32,8 @@ public class DataConfig {
         sf.setPackagesToScan(new String[]{"be.odisee.pajotter.domain"});
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("dialect", "org.hibernate.dialect.MySQLInnoDBDialect");
-        hibernateProperties.put("hibernate.hbm2ddl.auto","create-drop"); 
+        //hibernateProperties.put("hibernate.hbm2ddl.auto","create-drop"); 
+        hibernateProperties.put("hibernate.hbm2ddl.auto","update");
         sf.setHibernateProperties(hibernateProperties);
         sf.afterPropertiesSet();               
         return sf;
@@ -46,7 +47,8 @@ public class DataConfig {
         sf.setPackagesToScan(new String[]{"be.odisee.pajotter.domain"});
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("dialect", "org.hibernate.dialect.MySQLInnoDBDialect");
-        hibernateProperties.put("hibernate.hbm2ddl.auto","create-drop"); 
+        //hibernateProperties.put("hibernate.hbm2ddl.auto","create-drop");
+        hibernateProperties.put("hibernate.hbm2ddl.auto","update");
         sf.setHibernateProperties(hibernateProperties);
         sf.afterPropertiesSet();                 // omdat deze configuratie wijze ...
         return (SessionFactory) sf.getObject();  // nog wat scherpe kantjes heeft

@@ -1,7 +1,6 @@
 package be.odisee.pajotterconfig;
 
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,7 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 
 @Configuration
-@EnableGlobalMethodSecurity(securedEnabled=true,prePostEnabled=true,proxyTargetClass=true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true, proxyTargetClass = true)
 public class SecurityAnnotationsConfig extends GlobalMethodSecurityConfiguration{
 	
 	@Autowired

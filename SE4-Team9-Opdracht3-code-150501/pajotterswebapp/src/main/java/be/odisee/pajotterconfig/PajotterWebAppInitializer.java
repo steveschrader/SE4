@@ -13,7 +13,7 @@ public class PajotterWebAppInitializer extends AbstractAnnotationConfigDispatche
 	protected Class<?>[] getRootConfigClasses() {
 		return new Class<?>[] { RootConfig.class };
 	}
-
+	
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 		return new Class<?>[] { WebConfig.class };
