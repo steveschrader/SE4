@@ -24,8 +24,9 @@ public class ProductieHibernateDao extends HibernateDao implements ProductieDao 
 	}
 
 	@Override
-	public List<Productie> getAllProductie() {
-		return (List<Productie>) sessionGetAllObjects("Productie");
+	public List<Productie> getAllProductie(int id) {
+		return (List<Productie>) sessionGetAllObjectsBySpecificId("Productie", "partij_id", id);
+		//return (List<Productie>) sessionGetAllObjects("Productie");
 	}
 
 	@Override

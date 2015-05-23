@@ -125,6 +125,20 @@ public class HibernateDao {
         }
         return result;
     }
+    
+    protected Object sessionGetAllObjectsBySpecificId(String classname, String columnname, int id) {
+        //Object result = null;
+        Query query = null;
+ 		List result = null;
+        try {
+            query = sessionFactory.getCurrentSession().createQuery("from "+classname+" where " + columnname + " = "+id);
+            result = query.list();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     protected void sessionUpdateObject(Object o) {
         try {

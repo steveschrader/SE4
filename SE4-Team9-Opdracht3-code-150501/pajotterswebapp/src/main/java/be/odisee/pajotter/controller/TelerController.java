@@ -1,10 +1,13 @@
 package be.odisee.pajotter.controller;
 
 import be.odisee.pajotter.domain.*;
-import be.odisee.pajotter.service.PajottersSessieService;
+import be.odisee.pajotter.service.*;
 import be.odisee.pajotter.utilities.RolNotFoundException;
+
 import java.util.List;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,17 +19,21 @@ import org.springframework.web.bind.annotation.*;
 public class TelerController {
 	@Autowired
     protected PajottersSessieService pajottersSessieService = null;
+  @Autowired
+    protected UserContextService userContextService=null;
 	
 	@RequestMapping(value={"/Teler/index.html"}, method = RequestMethod.GET)
     public String Keuze(ModelMap model){
-        List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
+		Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Productie> deLijst = pajottersSessieService.geefAlleProductie(partij.getId());
         model.addAttribute("productie", deLijst);
         return "/Teler/index";
     }
     //lijst van alle productie
     @RequestMapping(value={"/Teler/productieLijst.html"}, method = RequestMethod.GET)
     public String indexProductie(ModelMap model){
-        List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
+		Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Productie> deLijst = pajottersSessieService.geefAlleProductie(partij.getId());
         model.addAttribute("productie", deLijst);
         return "/Teler/productieLijst";
     }
@@ -51,7 +58,8 @@ public class TelerController {
     @RequestMapping(value={"/Teler/verwijderProductie.html"}, method = RequestMethod.GET)
     public String productieDelete(@RequestParam("id") Integer id, ModelMap model) {
         pajottersSessieService.verwijderProductie(id);
-        List<Productie> deLijst = pajottersSessieService.geefAlleProductie();
+		Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Productie> deLijst = pajottersSessieService.geefAlleProductie(partij.getId());
         model.addAttribute("productie", deLijst);
         return "/Teler/productieLijst";
     }
@@ -76,7 +84,7 @@ public class TelerController {
     @RequestMapping(value={"/Teler/nieuweProductie.html"}, method = RequestMethod.POST)
     public String producteiToevoegen(@ModelAttribute("deproductie") @Valid Productie productie, BindingResult result, ModelMap model, @RequestParam int PartijId){
     	if (result.hasErrors()) return "/Teler/nieuweProductie"; 
-    	Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
+    	Partij partijDatVerzend = userContextService.getAuthenticatedPersoon();
     	Productie toegevoegdProductie = pajottersSessieService.VoegProductieToe("actief",partijDatVerzend, productie.getTekst(), productie.getAantal());
         System.out.println("DEBUG ProductieGegevens Tekstst: " + productie.getTekst() );
         return "redirect:/Teler/productie.html?id=" + toegevoegdProductie.getId();
@@ -87,7 +95,8 @@ public class TelerController {
     //lijst van alle bestelling
     @RequestMapping(value={"/Teler/bestellingLijst.html"}, method = RequestMethod.GET)
     public String indexBestelling(ModelMap model){
-        List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen();
+    	Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen(partij.getId(), "partij_id");
         model.addAttribute("bestelling", deLijst);
         return "/Teler/bestellingLijst";
     }
@@ -112,7 +121,8 @@ public class TelerController {
     @RequestMapping(value={"/Teler/verwijderBestelling.html"}, method = RequestMethod.GET)
     public String bestellingDelete(@RequestParam("id") Integer id, ModelMap model) {
         pajottersSessieService.verwijderBestelling(id);
-        List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen();
+    	Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen(partij.getId(), "partij_id");
         model.addAttribute("bestelling", deLijst);
         return "/Teler/bestellingLijst";
     }
@@ -135,9 +145,10 @@ public class TelerController {
     
     //nieuwe bestelling te maken
     @RequestMapping(value={"/Teler/nieuweBestelling.html"}, method = RequestMethod.POST)
-    public String producteiToevoegen(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model, @RequestParam int PartijId){
+    public String producteiToevoegen(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model){
     	if (result.hasErrors()) return "/Teler/nieuweBestelling"; 
-    	Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
+    	//Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
+    	Partij partijDatVerzend = userContextService.getAuthenticatedPersoon();
     	Bestelling toegevoegdBestelling = pajottersSessieService.VoegBestellingToe("actief",partijDatVerzend, bestelling.getTekst(), bestelling.getAantal(), bestelling.getLeverancierId());
         System.out.println("DEBUG BestellingGegevens Tekstst: " + bestelling.getTekst() );
         return "redirect:/Teler/bestelling.html?id=" + toegevoegdBestelling.getId();

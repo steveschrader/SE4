@@ -10,31 +10,31 @@
     <body>
     	<div id="BovenPaneel">
 			<div id="Titel">
-				<h1>Lijst van de verschillende aanbiedingen</h1>
+				<h1>Lijst van de verschillende bestellingen</h1>
 			</div>
 		</div>
 		<div id="MiddenPaneel">
 			<div id="Inhoud">
 				<ul>
-		            <c:forEach items="${aanbieding}" var="aanbieding">
-		                <c:url var="aanbiedingUrl" value="/Leverancier/aanbieding.html">
-		                    <c:param name="id" value="${aanbieding.id}" />
+		            <c:forEach items="${bestelling}" var="bestelling">
+		                <c:url var="bestellingUrl" value="/Teler/bestelling.html">
+		                    <c:param name="id" value="${bestelling.id}" />
 		                </c:url>
 		                <li>
-		                    <a href='<c:out value="${aanbiedingUrl}"/>'>
-		                        <c:out value="${aanbieding.aantal}" />
-		                        <c:out value="${aanbieding.tekst}" />
+		                    <a href='<c:out value="${bestellingUrl}"/>'>
+		                        <c:out value="${bestelling.aantal}" />
+		                        <c:out value="${bestelling.tekst}" />
 		                        
 		                    </a>
 		                </li>
 		            </c:forEach>
 		        </ul>
-		        <c:url var="nieuweAanbiedingUrl" value="nieuweAanbieding.html" />
+		        <c:url var="nieuweBestellingUrl" value="nieuweBestelling.html" />
 		        
 		        <div class="knoppenpaneel">
-		        	<a class="knop" href='<c:out value="${nieuweAanbiedingUrl}"/>'>Aanbieding Toevoegen</a>
+		        	<a class="knop" href='<c:out value="${nieuweBestellingUrl}"/>'>Bestelling Toevoegen</a>
 		        </div>
-		        <c:url var="index" value="/Leverancier/index.html" />
+		        <c:url var="index" value="/Teler/index.html" />
 		        
 		        <div class="knoppenpaneel">
 		        	<a class="knop" href='<c:out value="${index}"/>'>Terug</a>

@@ -4,27 +4,27 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Nieuwe Aanbieding toevoegen - Pajottersapplicatie</title>
+        <title>Nieuwe Bestelling toevoegen - Pajottersapplicatie</title>
         <link href=opmaak.css rel="stylesheet"/>
     </head>
     
     <body>
     	<div id="BovenPaneel">
 			<div id="Titel">
-				<h1>Aanbieding toevoegen</h1>
+				<h1>Bestelling toevoegen</h1>
 			</div>
 		</div>
 		<div id="MiddenPaneel">
 			<div id="Inhoud">
-				<p>Vul de het onderstaande formulier in om een nieuwe aanbieding toe te voegen.</p>
-		        <c:url var="url" value="/Leverancier/nieuweAanbieding.html">
-		        <c:param name="PartijId" value="1" />
+				<p>Vul de het onderstaande formulier in om een nieuwe bestelling toe te voegen.</p>
+		        <c:url var="url" value="/Teler/nieuweBestelling.html">
+		        <c:param name="PartijId" value="${rol.id}" />
 		        </c:url>
-		        <form:form action="${url}" commandName="deaanbieding">   <%-- Spring form tags --%>
+		        <form:form action="${url}" commandName="debestelling">   <%-- Spring form tags --%>
 			            <table>
 				            <tbody>
 				            	<tr>
-				            		<td><label for="tekst">Aan te bieden aanbieding:</label></td> <td><form:input id="tekst" path="tekst"/></td>
+				            		<td><label for="tekst">Aan te bieden bestelling:</label></td> <td><form:input id="tekst" path="tekst"/></td>
 				            		<td><font color="red"><form:errors path="tekst" /></font></td>
 				            	</tr>
 				            	<tr>
@@ -32,12 +32,17 @@
 				            		<td><font color="red"><form:errors path="aantal" /></font></td>
 				            	</tr>
 				            	
+				            	<tr>
+				            		<td><label for="lev">Leverancier:</label></td> <td><form:input id="lev" path="LeverancierId" type="number"/></td>
+				            		<td><font color="red"><form:errors path="LeverancierId" /></font></td>
+				            	</tr>
+				            	
 			            	</tbody>
 			            </table>
 			            
 			            <div class="knoppenpaneel">
 		                	<input class="knop" name="submit" type="submit" value="Opslaan"/>
-		                	<c:url var="home" value="/home.html" />
+		                	<c:url var="home" value="/index.html" />
 		                	<a class="knop" href='<c:out value="${home}"/>'>Home</a>
 		                </div>
 		        </form:form>

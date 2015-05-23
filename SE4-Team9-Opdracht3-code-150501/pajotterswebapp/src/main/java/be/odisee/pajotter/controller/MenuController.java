@@ -51,8 +51,8 @@ public class MenuController {
         Rol deRol = PajottersSessieService.zoekRolMetId(dePartij.getId());
         model.addAttribute("rol",deRol);
         if (deRol.getType().equals("Administrator")) return "redirect:/Administrator/index.html?rolid="+deRol.getId();
-        else if (deRol.getType().equals("Koper")) return "redirect:/koper/index.html?rolid="+deRol.getId();
-        else if (deRol.getType().equals("Teler")) return "redirect:/teler/index.html?rolid="+deRol.getId();
+        else if (deRol.getType().equals("Koper")) return "redirect:/Koper/index.html?rolid="+deRol.getId();
+        else if (deRol.getType().equals("Teler")) return "redirect:/Teler/index.html?rolid="+deRol.getId();
         else if (deRol.getType().equals("Leverancier")) return "redirect:/Leverancier/index.html?rolid="+deRol.getId();
         return "redirect:/Pajotters/index.html?rolid="+deRol.getId();
         

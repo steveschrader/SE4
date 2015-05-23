@@ -36,6 +36,11 @@
 		        <div class="knoppenpaneel">
 		        	<a class="knop" href='<c:out value="${nieuwePartijUrl}"/>'>Partij Toevoegen</a>
 		        </div>
+		        <c:url var="logout" value="/logout.html" />
+		        
+		        <div class="knoppenpaneel">
+		        	<a class="knop" href='<c:out value="${logout}"/>'>Logout</a>
+		        </div>
 			</div>
 		</div>
     </body>

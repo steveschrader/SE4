@@ -33,8 +33,9 @@ public class BestellingHibernateDao extends HibernateDao implements BestellingDa
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Bestelling> getAllBestelling() {
-		return (List<Bestelling>) sessionGetAllObjects("Bestelling");
+	public List<Bestelling> getAllBestelling(int id, String columnname) {
+		return (List<Bestelling>) sessionGetAllObjectsBySpecificId("Bestelling", columnname, id);
+		//return (List<Bestelling>) sessionGetAllObjects("Bestelling");
 	}
 
 	@Override

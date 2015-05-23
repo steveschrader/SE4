@@ -18,7 +18,7 @@
 		<div id="MiddenPaneel">
 			<div id="Inhoud">
 				
-		        <c:url var="Bestelling" value="/Teler/aanbiedingLijst.html" />
+		        <c:url var="Bestelling" value="/Teler/bestellingLijst.html" />
 		        
 		        <div class="knoppenpaneel">
 		        	<a class="knop" href='<c:out value="${Bestelling}"/>'>Bestellingen beheren</a>
@@ -27,7 +27,7 @@
 		           <c:url var="Productie" value="/Teler/productieLijst.html" />
 		        
 		        <div class="knoppenpaneel">
-		        	<a class="knop" href='<c:out value="${productie}"/>'>Productie beheren</a>
+		        	<a class="knop" href='<c:out value="${Productie}"/>'>Productie beheren</a>
 		        </div>
 		        <c:url var="logout" value="/logout.html" />
 		        

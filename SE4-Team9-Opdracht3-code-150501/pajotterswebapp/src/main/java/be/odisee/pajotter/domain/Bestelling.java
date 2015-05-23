@@ -14,6 +14,9 @@ public class Bestelling extends Bericht implements Serializable{
 	@Column
 	//@NotEmpty(message="Vul een aantal in AUB")
 	private int aantal;
+	
+	@Column
+    @NotEmpty(message = "Vul Leverancier in aub")
 	private int LeverancierId;
 	
     public Bestelling(int id, String status, Partij partij, String tekst, int aantal) throws Exception {

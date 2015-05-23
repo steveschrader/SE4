@@ -24,7 +24,7 @@
 		<div id="MiddenPaneel">
 			<div id="Inhoud">
 				<p>Bewerk de onderstaande velden naar believen en klik op opslaan.
-				<c:url var="url" value="/updateProductie.html" />
+				<c:url var="url" value="/Teler/updateProductie.html" />
 				<form:form method="POST" commandName="deproductie" action="${url}" >
 					<table>
 						<tbody>
@@ -40,12 +40,16 @@
 			            		<td><label for="aantal">Aantal:</label></td> <td><form:input id="aantal" path="aantal" type="number"/></td>
 			            		<td><font color="red"><form:errors path="aantal" /></font></td>
 			            	</tr>
+			            	<tr>
+			            		<td><label for="leverancier">Leverancier:</label></td> <td><form:input id="leverancier" path="LeverancierId" type="number"/></td>
+			            		<td><font color="red"><form:errors path="LeverancierId" /></font></td>
+			            	</tr>
 						</tbody>
 					</table>
 					
 					<div class="knoppenpaneel">
 						<input class="knop" name="submit" type="submit" value="Opslaan" />
-						<c:url var="home" value="/productieLijst.html" />
+						<c:url var="home" value="/Teler/productieLijst.html" />
 						<a class="knop" href='<c:out value="${home}"/>'>Annuleren</a>
 					</div>
 				</form:form>
