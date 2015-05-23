@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		auth.jdbcAuthentication()
 			.dataSource(datasource)
-			.usersByUsernameQuery("select emailadres, paswoord, true as enabled from partijen where emailadres=?")
+			.usersByUsernameQuery("select emailadres, paswoord, true as enabled from partijen where emailadres = ?")
 			.authoritiesByUsernameQuery("select partijen.emailadres, rollen.type as authority from partijen,rollen"+
 											" where partijen.id=rollen.partij_id and emailadres=?");
 	}
@@ -46,13 +46,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/accessDenied*").permitAll()
 			.antMatchers("/Administrator/**").hasAuthority("Administrator")
 			.antMatchers("/Koper/**").hasAuthority("Koper")
-			.antMatchers("/Teler/**").hasAnyAuthority("Teler")
-			.antMatchers("/Leverancier/**").hasAuthority("Leverancier")
 			.antMatchers("/Pajotters/**").hasAnyAuthority("Administrator","Koper", "Leverancier", "Teler")
+			.antMatchers("/Pajotter/**").hasAnyAuthority("Pajotter")
+			.antMatchers("/Leverancier/**").hasAuthority("Leverancier")
+			.antMatchers("/Bestelling/**").hasAnyAuthority("Industrie", "Koper")
+			.antMatchers("/Industrie/**").hasAuthority("Industrie")
+			.antMatchers("/Teler/**").hasAuthority("Teler")
+>>>>>>> origin/master
 			.antMatchers("/**").authenticated()
 			.anyRequest().authenticated()
 			.and()
 			.exceptionHandling().accessDeniedPage("/accessDenied");
-		
 	}
 }

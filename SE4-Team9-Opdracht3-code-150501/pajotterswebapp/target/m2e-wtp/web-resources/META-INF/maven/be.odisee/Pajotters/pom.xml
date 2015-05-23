@@ -32,12 +32,6 @@
   </repositories>
 
   <dependencies>
-  <!-- Dit heb ik toegevoegd omdat er iets niet wou werken en ik weet niet goed waarom :s -->
- <dependency> 
-    <groupId>xml-apis</groupId>
-    <artifactId>xml-apis</artifactId>
-    <version>1.4.01</version>
-</dependency>
   
     <dependency>
         <groupId>cglib</groupId>
@@ -144,6 +138,38 @@
     </dependency>
  
     <dependency>
+        <groupId>${hibernate.group}</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>4.3.2.Final</version>
+        <type>jar</type>
+    </dependency>
+ 
+
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-core</artifactId>
+        <version>${spring.security.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-config</artifactId>
+        <version>${spring.security.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>${spring.security.version}</version>
+    </dependency>
+
+    <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>jstl</artifactId>
         <version>1.1.2</version>
@@ -235,63 +261,11 @@
   		<version>3.12.1.GA</version>
 	  </dependency>     
 
-      <!-- <dependency>
+      <dependency>
           <groupId>org.seleniumhq.selenium.client-drivers</groupId>
           <artifactId>selenium-java-client-driver</artifactId>
           <version>1.0</version>
-      </dependency> -->
-      
-      <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>2.45.0</version>
-	  </dependency>
-	  
-	  <dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-validator</artifactId>
-		<version>4.0.2.GA</version>
-	</dependency>
-
-	<dependency>
-        <groupId>${hibernate.group}</groupId>
-        <artifactId>hibernate-core</artifactId>
-        <version>${hibernate.version}</version>
-        <type>jar</type>
-    </dependency>
- 
-    <dependency>
-        <groupId>${hibernate.group}</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <version>4.3.2.Final</version>
-        <type>jar</type>
-    </dependency>
-    
-    <dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-core</artifactId>
-        <version>${spring.security.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-taglibs</artifactId>
-      <version>${spring.security.version}</version>
-    </dependency>
-
-    <dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-config</artifactId>
-        <version>${spring.security.version}</version>
-    </dependency>
-
-    <dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-web</artifactId>
-        <version>${spring.security.version}</version>
-    </dependency>
- 
-	  
+      </dependency>                      
   
   </dependencies>
 

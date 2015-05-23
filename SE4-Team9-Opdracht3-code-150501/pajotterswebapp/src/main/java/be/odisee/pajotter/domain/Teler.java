@@ -37,10 +37,6 @@ public class Teler extends Rol {
         //this.adres = adres;
         //this.telefoon = telefoon;
     }
-	
-	
-	
-    
 
 	/*private static final long serialVersionUID = 1L;
 

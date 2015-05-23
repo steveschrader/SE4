@@ -3,21 +3,18 @@ package be.odisee.pajotter.domain;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-
 import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.utilities.RolNotFoundException;
 
 @Entity
 @Table(name = "partijen")
 
-public class Partij implements Serializable{
+public class Partij implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,26 +27,24 @@ public class Partij implements Serializable{
 
     @Column
     @Index(name = "IPartij_naam", columnNames = "familienaam, voornaam")
-    @NotEmpty(message="Vul voornaam in aub")
+    @NotEmpty(message = "Vul voornaam in aub")
     private String voornaam;
 
     @Column
-    @NotEmpty(message="Vul achternaam in aub")
+    @NotEmpty(message = "Vul achternaam in aub")
     private String familienaam;
 
     @Column
     @Index(name = "IPartij_email", columnNames = "emailadres")
-    @Pattern(regexp=".+@.+\\..+", message="Email is niet correct")
+    @Pattern(regexp = ".+@.+\\..+", message = "Email is niet correct")
     private String emailadres;
 
     @Column
-    @Length(min=8, max=80, message="Wachtwoord moet tussen 8 en 80 karakters lang zijn")
+    @Length(min = 8, max = 80, message = "Wachtwoord moet tussen 8 en 80 karakters lang zijn")
     private String paswoord;
     
-    
-    
-    @OneToMany(fetch=FetchType.EAGER,mappedBy="partij")
-    private Set<Rol> m_Rollen= new HashSet<Rol>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "partij")
+    private Set<Rol> m_Rollen = new HashSet<Rol>();
     
     public Partij() {
     	this.status = "Actief";
@@ -71,8 +66,7 @@ public class Partij implements Serializable{
         this.emailadres = emailadres;
         this.paswoord = paswoord;
     }
-  
-
+    
     public int getId() {
         return id;
     }
@@ -93,9 +87,9 @@ public class Partij implements Serializable{
         return familienaam;
     }
 
-    /*public Set<Rol> getRollen(){
+    public Set<Rol> getRollen(){
         return m_Rollen;
-    }*/
+    }
 
     public void setEmailadres(String emailadres) {
         this.emailadres = emailadres;
@@ -129,20 +123,16 @@ public class Partij implements Serializable{
         this.voornaam = voornaam;
     }
 
-	
     public Rol voegRolToe(String type, String status, String usernaam) throws RolNotFoundException{
         Rol newRol = null;
-        if (type.toLowerCase().equals("administrator")) newRol= new Administrator(status, usernaam, this);
-        if (type.toLowerCase().equals("teler")) newRol= new Teler(status, usernaam, this);
-        if (type.toLowerCase().equals("pajotter")) newRol= new Pajotter(status, usernaam, this);
-        if (type.toLowerCase().equals("leverancier")) newRol= new Leverancier(status, usernaam, this);
-        if (type.toLowerCase().equals("industrie")) newRol= new Industrie(status, usernaam, this);
-        if (type.toLowerCase().equals("koper")) newRol= new Koper(status, usernaam, this);
-        if (newRol==null) throw new RolNotFoundException("Type "+type+" is geen bekende Rol");
+        if (type.toLowerCase().equals("Administrator")) newRol = new Administrator(status, usernaam, this);
+        if (type.toLowerCase().equals("Teler")) newRol = new Teler(status, usernaam, this);
+        if (type.toLowerCase().equals("Pajotter")) newRol = new Pajotter(status, usernaam, this);
+        if (type.toLowerCase().equals("Leverancier")) newRol = new Leverancier(status, usernaam, this);
+        if (type.toLowerCase().equals("Industrie")) newRol = new Industrie(status, usernaam, this);
+        if (type.toLowerCase().equals("Koper")) newRol = new Koper(status, usernaam, this);
+        if (newRol==null) throw new RolNotFoundException("Type '" + type + "' is geen bekende Rol.");
         m_Rollen.add(newRol);
         return newRol;
     }
-
-	
-	
 }

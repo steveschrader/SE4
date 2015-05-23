@@ -6,15 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import be.odisee.pajotterconfig.DataConfig;
-import be.odisee.pajotterconfig.SecurityConfig;
+import be.odisee.pajotterconfig.*;
 
 @Configuration
-@Import({DataConfig.class,SecurityConfig.class})
-@ComponentScan(basePackages={"be.odisee.pajotter"}, 
-    excludeFilters={
-        @Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)
+@Import({DataConfig.class, SecurityConfig.class})
+@ComponentScan(basePackages = {"be.odisee.pajotter"}, 
+    excludeFilters = {
+        @Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)
     })
 public class RootConfig {
 }
