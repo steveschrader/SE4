@@ -35,7 +35,7 @@ public class AdministratorController {
     //Lijst van alle partijen, meteen op het hoofdsherm
     @RequestMapping(value = {"/home.html", "/home", "/index.html", "/index", "/lijst.html", "/lijst"}, method = RequestMethod.GET)
     //@PostAuthorize("#model.get('rol').partij.emailadres == authentication.principal.username")
-    public String index(/*@RequestParam("rolid") Integer id,*/ ModelMap model) {
+    public String index(/*@RequestParam("rolid") int id,*/ ModelMap model) {
     	//Rol rolAuth = pajottersSessieService.zoekRolMetId(id);
     	//model.addAttribute("rol", rolAuth);
         List<Partij> partijlijst = pajottersSessieService.geefAllePartijen();
@@ -45,7 +45,7 @@ public class AdministratorController {
     
     //Geef details van de geselecteerde partij op basis van zijn id
     @RequestMapping(value = {"/partij.html", "/partij"}, method = RequestMethod.GET)
-    public String partijDetail(@RequestParam("id") Integer id, ModelMap model) {
+    public String partijDetail(@RequestParam("id") int id, ModelMap model) {
     	Partij partij = pajottersSessieService.zoekPartijMetId(id);
     	Rol rol = pajottersSessieService.zoekRolMetId(id);
         model.addAttribute("partij", partij);
@@ -84,8 +84,9 @@ public class AdministratorController {
     
     //Om de partij te verwijderen
     @RequestMapping(value = {"/verwijderPartij.html", "/verwijderPartij"}, method = RequestMethod.GET)
-    public String partijDelete(@RequestParam("id") Integer id, ModelMap model) {
-        pajottersSessieService.verwijderPartij(id);
+    public String partijDelete(@RequestParam("id") int id, ModelMap model) {
+        //pajottersSessieService.verwijderRol(id);
+    	pajottersSessieService.verwijderPartij(id);
         List<Partij> deLijst = pajottersSessieService.geefAllePartijen();
         model.addAttribute("partijen", deLijst);
         return "/Administrator/index";
@@ -115,7 +116,7 @@ public class AdministratorController {
     
     //Om naar de update pagina te gaan en de partij info mee te geven
     @RequestMapping(value = {"/updatePartij.html", "/updatePartij", "/editPartij", "/editPartij.html"}, method = RequestMethod.GET)
-    public String telerEditpagina(@RequestParam("id") Integer id, ModelMap model){
+    public String telerEditpagina(@RequestParam("id") int id, ModelMap model){
     	Partij partij = pajottersSessieService.zoekPartijMetId(id);
     	Rol rol = pajottersSessieService.zoekRolMetId(id);
         model.addAttribute("departij", partij);

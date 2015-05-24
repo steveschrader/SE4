@@ -33,7 +33,7 @@
 								<td><form:input id="idveld" path="id"></form:input><div id="zichtbareid"></div></td>
 							</tr>
 							<tr>
-			            		<td><label for="tekst">Aan te bieden bestelling:</label></td> <td><form:input id="tekst" path="tekst"/></td>
+			            		<td><label for="tekst">Gevraagde bestelling:</label></td> <td><form:input id="tekst" path="tekst"/></td>
 			            		<td><font color="red"><form:errors path="tekst" /></font></td>
 			            	</tr>
 			            	<tr>

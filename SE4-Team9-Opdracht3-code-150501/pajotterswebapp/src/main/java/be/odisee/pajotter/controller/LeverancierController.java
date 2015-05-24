@@ -50,7 +50,7 @@ public class LeverancierController {
         return "/Leverancier/aanbiedingLijst";
     }
     //lijst van alle Bestellingen
-    @RequestMapping(value={"/Leverancier/bestellingLijst.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/bestellingLijst.html"}, method = RequestMethod.GET)
     public String LijstBestellingen(ModelMap model){
     	Partij partij = userContextService.getAuthenticatedPersoon();
         List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen(partij.getId(), "LeverancierId");

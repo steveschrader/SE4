@@ -33,7 +33,7 @@
 		        </ul>
 		        <c:url var="nieuweBestellingUrl" value="nieuweBestelling.html" />
 		        
-		        <c:url var="index" value="/Teler/index.html" />
+		        <c:url var="index" value="/Leverancier/index.html" />
 		        
 		        <div class="knoppenpaneel">
 		        	<a class="knop" href='<c:out value="${index}"/>'>Terug</a>

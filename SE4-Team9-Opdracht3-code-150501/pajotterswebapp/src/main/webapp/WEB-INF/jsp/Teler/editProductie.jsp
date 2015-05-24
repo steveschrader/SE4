@@ -40,10 +40,7 @@
 			            		<td><label for="aantal">Aantal:</label></td> <td><form:input id="aantal" path="aantal" type="number"/></td>
 			            		<td><font color="red"><form:errors path="aantal" /></font></td>
 			            	</tr>
-			            	<tr>
-			            		<td><label for="leverancier">Leverancier:</label></td> <td><form:input id="leverancier" path="LeverancierId" type="number"/></td>
-			            		<td><font color="red"><form:errors path="LeverancierId" /></font></td>
-			            	</tr>
+			            	
 						</tbody>
 					</table>
 					

@@ -18,7 +18,7 @@
 			<div id="Inhoud">
 				<p>Vul de het onderstaande formulier in om een nieuwe bestelling toe te voegen.</p>
 		        <c:url var="url" value="/Teler/nieuweBestelling.html">
-		        <c:param name="PartijId" value="${rol.id}" />
+		       
 		        </c:url>
 		        <form:form action="${url}" commandName="debestelling">   <%-- Spring form tags --%>
 			            <table>

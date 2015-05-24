@@ -27,7 +27,7 @@
 		        	</tr>
 		        	
 		        	<tr>
-		        		<td><b>Leverancier:</b></td> <td><c:out value="${bestelling.LervancierId}"/></td>
+		        		
 		        	</tr>
 		        	
 		        	
