@@ -69,4 +69,30 @@ public interface PajottersSessieService {
     public void updateBestelling(Bestelling bestelling);
     
     public void verwijderBestelling(int bestellingID);
+    
+    //Teler kan vraag stellen
+    public Vraag VoegVraagToe(String status, Partij partij, String tekst);
+
+    public Vraag zoekVraagMetId(int bestellingId);
+
+    public List<Vraag> geefAlleVraagen(int id, String Columnname);
+    
+    public List<Vraag> geefAlleVraagen();
+
+    public void updateVraag(Vraag bestelling);
+    
+    public void verwijderVraag(int bestellingID);
+    
+    //Pajotter kan antwoorden op vraag 
+    public Antwoord VoegAntwoordToe(String status, Partij partij, Bericht reactieOp, String tekst);
+
+    public Antwoord zoekAntwoordMetId(int bestellingId);
+
+    public List<Antwoord> geefAlleAntwoorden(int id, String Columnname);
+
+    public void updateAntwoord(Antwoord bestelling);
+    
+    public void verwijderAntwoord(int bestellingID);
+
+
 }

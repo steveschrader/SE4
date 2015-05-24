@@ -94,7 +94,7 @@ public class AdministratorController {
     //Om de partij up te daten
     @RequestMapping(value = {"/updatePartij.html", "/updatePartij", "/editPartij.html", "/editPartij"}, method = RequestMethod.POST)
     public String telerUpdate(@ModelAttribute("departij") @Valid Partij partij, BindingResult result, ModelMap model, @RequestParam String rol) {
-    	if (result.hasErrors()) return "/editPartij"; 
+    	if (result.hasErrors()) return "/Administrator/editPartij"; 
     	
     	pajottersSessieService.verwijderRol(partij.getId());
     	pajottersSessieService.updatePartij(partij);

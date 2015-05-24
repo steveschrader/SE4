@@ -52,10 +52,6 @@
 										  <form:option value="Teler">Teler</form:option>
 										</form:select>
 									</td>
-									
-									
-   									
-   									
 				                </tr>
 			            	</tbody>
 			            </table>

@@ -30,6 +30,12 @@
 		        	<a class="knop" href='<c:out value="${Productie}"/>'>Productie beheren</a>
 		        </div>
 		        
+		         <c:url var="Vraag" value="/Teler/vraagLijst.html" />
+		        
+		        <div class="knoppenpaneel">
+		        	<a class="knop" href='<c:out value="${Vraag}"/>'>Vragen beheren</a>
+		        </div>
+		        
 				<form class="form-inline" action="/Pajotters/logout" method="post">
 					<input type="submit" value="Log out" />
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

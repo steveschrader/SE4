@@ -26,6 +26,10 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 	
 	private BestellingDao bestellingDao;
 	
+	private VraagDao vraagDao;
+	
+	private AntwoordDao antwoordDao;
+	
 	public PajottersSessieServiceImpl(){}
 
     @Autowired
@@ -57,6 +61,19 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
     {
         this.bestellingDao = bestellingDao;
     }
+    
+    @Autowired 
+    public void setVraagDao(VraagDao vraagDao)
+    {
+        this.vraagDao = vraagDao;
+    }
+    
+    @Autowired 
+    public void setAntwoordDao(AntwoordDao antwoordDao)
+    {
+        this.antwoordDao = antwoordDao;
+    }
+    
     
     //PARTIJEN
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
@@ -236,6 +253,85 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 	public void verwijderBestelling(int bestellingId) {
 		
 		bestellingDao.deleteBestelling(bestellingId);
+		
+	}
+	
+	
+	  //Vraag van Teler
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public Vraag VoegVraagToe(String status, Partij partij, String tekst) {
+		Vraag devraag = null;
+		try {
+			devraag = new Vraag(status,partij, tekst);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		vraagDao.saveVraag(devraag);
+		return devraag;
+	}
+
+	public Vraag zoekVraagMetId(int Vraag) {
+		Vraag devraag = vraagDao.getVraagById(Vraag);
+		return devraag;
+	}
+
+	@Override
+	public List<Vraag> geefAlleVraagen(int id, String Columnname) {
+		return vraagDao.getAllVraag(id);
+	}
+	public List<Vraag> geefAlleVraagen() {
+		return vraagDao.getAllVraag();
+	}
+
+	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void updateVraag(Vraag vraag) {
+		
+		vraagDao.updateVraag(vraag);
+	}
+
+	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void verwijderVraag(int vraagId) {
+		
+		vraagDao.deleteVraag(vraagId);
+		
+	}
+	
+	  //Vraag van Teler
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public Antwoord VoegAntwoordToe(String status, Partij partij,Bericht bericht, String tekst) {
+		Antwoord deantwoord = null;
+		try {
+			deantwoord = new Antwoord(status, partij, bericht, tekst);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		antwoordDao.saveAntwoord(deantwoord);
+		return deantwoord;
+	}
+
+	public Antwoord zoekAntwoordMetId(int Antwoord) {
+		Antwoord deantwoord = antwoordDao.getAntwoordById(Antwoord);
+		//antwoordDao.get
+		return deantwoord;
+	}
+
+	@Override
+	public List<Antwoord> geefAlleAntwoorden(int id, String Columnname) {
+		return antwoordDao.getAllAntwoord(id);
+	}
+
+	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void updateAntwoord(Antwoord antwoord) {
+		
+		antwoordDao.updateAntwoord(antwoord);
+	}
+
+	@Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public void verwijderAntwoord(int antwoordId) {
+		
+		antwoordDao.deleteAntwoord(antwoordId);
 		
 	}
 

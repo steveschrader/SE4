@@ -143,12 +143,76 @@ public class TelerController {
     
     //nieuwe bestelling te maken
     @RequestMapping(value={"/nieuweBestelling.html"}, method = RequestMethod.POST)
-    public String producteiToevoegen(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model, @RequestParam int PartijId){
+    public String producteiToevoegen(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model){
     	if (result.hasErrors()) return "/Teler/nieuweBestelling"; 
     	//Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
     	Partij partijDatVerzend = userContextService.getAuthenticatedPersoon();
     	Bestelling toegevoegdBestelling = pajottersSessieService.VoegBestellingToe("actief",partijDatVerzend, bestelling.getTekst(), bestelling.getAantal(), bestelling.getLeverancierId());
         System.out.println("DEBUG BestellingGegevens Tekstst: " + bestelling.getTekst() );
         return "redirect:/Teler/bestelling.html?id=" + toegevoegdBestelling.getId();
+    }
+    
+ //---------------------------------------------Vraag-----------------------------------------------------------------
+    
+    //lijst van alle bestelling
+    @RequestMapping(value={"/vraagLijst.html"}, method = RequestMethod.GET)
+    public String indexVraag(ModelMap model){
+    	Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Vraag> deLijst = pajottersSessieService.geefAlleVraagen(partij.getId(), "partij_id");
+        model.addAttribute("vraag", deLijst);
+        return "/Teler/vraagLijst";
+    }
+    
+    //details van de producite
+    @RequestMapping(value={"/vraag.html"}, method = RequestMethod.GET)
+    public String vraagDetail(@RequestParam("id") Integer id, ModelMap model) {
+        Vraag vraag = pajottersSessieService.zoekVraagMetId(id);
+        model.addAttribute("vraag", vraag);
+        return "/Teler/vraag";
+    }
+    
+    //om een vraag toe te voegen
+    @RequestMapping(value={"/nieuweVraag.html"}, method = RequestMethod.GET)
+    public String vraagFormulier(ModelMap model) {
+        Vraag vraag = new Vraag();
+        model.addAttribute("devraag", vraag);
+        return "/Teler/nieuweVraag";
+    }
+    
+    //om de vraag te verwijderen
+    @RequestMapping(value={"/verwijderVraag.html"}, method = RequestMethod.GET)
+    public String vraagDelete(@RequestParam("id") Integer id, ModelMap model) {
+        pajottersSessieService.verwijderVraag(id);
+    	Partij partij = userContextService.getAuthenticatedPersoon();
+        List<Vraag> deLijst = pajottersSessieService.geefAlleVraagen(partij.getId(), "partij_id");
+        model.addAttribute("vraag", deLijst);
+        return "/Teler/vraagLijst";
+    }
+    
+    //om de vraag up te daten
+    @RequestMapping(value={"/updateVraag.html"}, method = RequestMethod.POST)
+    public String vraagUpdate(@ModelAttribute("devraag") @Valid Vraag vraag, BindingResult result, ModelMap model){
+    	pajottersSessieService.updateVraag(vraag);
+        model.addAttribute("vraag", vraag);
+        return "/Teler/vraag";
+    }
+    
+    //om naar de update pagina te gaan en de vraag info mee te geven
+    @RequestMapping(value={"/updateVraag.html"}, method = RequestMethod.GET)
+    public String vraagEditpagina(@RequestParam("id") Integer id, ModelMap model) {
+    	Vraag vraag = pajottersSessieService.zoekVraagMetId(id);
+        model.addAttribute("devraag", vraag);
+        return "/Teler/editVraag";
+    }
+    
+    //nieuwe vraag te maken
+    @RequestMapping(value={"/nieuweVraag.html"}, method = RequestMethod.POST)
+    public String producteiToevoegen(@ModelAttribute("devraag") @Valid Vraag vraag, BindingResult result, ModelMap model){
+    	if (result.hasErrors()) return "/Teler/nieuweVraag"; 
+    	//Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
+    	Partij partijDatVerzend = userContextService.getAuthenticatedPersoon();
+    	Vraag toegevoegdVraag = pajottersSessieService.VoegVraagToe("actief",partijDatVerzend, vraag.getTekst());
+        System.out.println("DEBUG VraagGegevens Tekstst: " + vraag.getTekst() );
+        return "redirect:/Teler/vraag.html?id=" + toegevoegdVraag.getId();
     }
 }
