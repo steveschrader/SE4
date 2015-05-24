@@ -52,7 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/Bestelling/**").hasAnyAuthority("Industrie", "Koper")
 			.antMatchers("/Industrie/**").hasAuthority("Industrie")
 			.antMatchers("/Teler/**").hasAuthority("Teler")
->>>>>>> origin/master
 			.antMatchers("/**").authenticated()
 			.anyRequest().authenticated()
 			.and()
