@@ -46,12 +46,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/accessDenied*").permitAll()
 			.antMatchers("/Administrator/**").hasAuthority("Administrator")
 			.antMatchers("/Koper/**").hasAuthority("Koper")
-			.antMatchers("/Pajotters/**").hasAnyAuthority("Administrator","Koper", "Leverancier", "Teler")
+			/*onderstaande regel in commentaar leidt tot niets*/
+			/*.antMatchers("/Pajotters/**").hasAnyAuthority("Administrator","Koper", "Leverancier", "Teler")*/
 			.antMatchers("/Pajotter/**").hasAnyAuthority("Pajotter")
 			.antMatchers("/Leverancier/**").hasAuthority("Leverancier")
-			.antMatchers("/Bestelling/**").hasAnyAuthority("Industrie", "Koper")
+			.antMatchers("/Bestelling/**").hasAnyAuthority("Industrie", "Koper", "Teler")
 			.antMatchers("/Industrie/**").hasAuthority("Industrie")
 			.antMatchers("/Teler/**").hasAuthority("Teler")
+
+			.antMatchers("/css/**").anonymous()
+			.antMatchers("/js/**").anonymous()
+
 			.antMatchers("/**").authenticated()
 			.anyRequest().authenticated()
 			.and()

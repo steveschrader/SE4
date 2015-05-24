@@ -42,7 +42,7 @@
 					<c:param name="id" value="${partij.id}" />
 		        </c:url>
 		        
-		        <c:url var="home" value="/Administrator/home.html" />
+		        <c:url var="home" value="/Administrator/home.html"/>
 		        
 		        <c:url var="updatepartijUrl" value="/Administrator/updatePartij.html">
 					<c:param name="id" value="${partij.id}" />

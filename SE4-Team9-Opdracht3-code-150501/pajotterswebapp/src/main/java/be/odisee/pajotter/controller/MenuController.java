@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/")
 public class MenuController {
 
     @Autowired
@@ -21,34 +22,45 @@ public class MenuController {
     @Autowired
     protected UserContextService userContextService = null;
 
-    @RequestMapping(value = {"/login","/login.html"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/login", "/login.html"}, method = RequestMethod.GET)
     public String login(ModelMap model){
     	System.out.println("NAAR DE LOGIN");
     	return "/login";
     }
     // je zal naar login.jsp gaan
 
-    @RequestMapping(value={"/logout","/logoutSuccess.html"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/logout", "/logoutSuccess.html"}, method = RequestMethod.GET)
     public String logout(ModelMap model){
     	return "/logoutSuccess";
     }
     // je zal naar logoutSuccess.jsp gaan
 
-    @RequestMapping(value={"/accessDenied","/accessDenied.html"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/accessDenied", "/accessDenied.html"}, method = RequestMethod.GET)
     public String accessDenied(ModelMap model){
     	return "/accessDenied";
     }
     // je zal naar accessDenied.jsp gaan
 
-    @RequestMapping(value={"/","/menu.html","/index.html"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/jquery.js", "/jquery"}, method = RequestMethod.GET)
+    public String jquery(ModelMap model){
+    	return "js/jquery-2.1.3.min.js";
+    }
+    @RequestMapping(value = {"/opmaak.css", "/opmaak"}, method = RequestMethod.GET)
+    public String opmaak(ModelMap model){
+    	return "css/Opmaak.css";
+    }
+    
+    @RequestMapping(value = {"/", "/menu.html", "/menu", "/index.html", "index"}, method = RequestMethod.GET)
     @PostAuthorize("#model.get('rol').partij.emailadres == authentication.principal.username")
-    public String menu(ModelMap model){
+    public String menu(ModelMap model) {
+    	
+    	System.out.println("test");
+    	
         Partij dePartij = userContextService.getAuthenticatedPersoon();
-        model.addAttribute("partij",dePartij);
-        //return "/menu";
+        model.addAttribute("partij", dePartij);
         Rol deRol = PajottersSessieService.zoekRolMetId(dePartij.getId());
-        model.addAttribute("rol",deRol);
-
+        model.addAttribute("rol", deRol);
+        
         if (deRol.getType().equals("Administrator"))
         	return "redirect:/Administrator/index.html?rolid=" + deRol.getId();
         else if (deRol.getType().equals("Koper"))
@@ -61,21 +73,28 @@ public class MenuController {
         	return "redirect:/Industrie/index.html?rolid=" + deRol.getId();
         else if (deRol.getType().equals("Pajotter"))
         	return "redirect:/Pajotter/index.html?rolid=" + deRol.getId();
-        return "/accesDenied";
-
+        return "redirect:/accessDenied.html" + deRol.getId();
     }
 
     //Deze methode wordt dus nooit gebruikt omdat elke partij maar één rol kan hebben tot nu toe
-    @RequestMapping(value={"/rol.html"},method=RequestMethod.GET)
-    @PostAuthorize("#model.get('rol').partij.emailadres == authentication.principal.username")
-    public String indexVoorRol(@RequestParam("id") Integer id, ModelMap model){
-        Rol deRol = PajottersSessieService.zoekRolMetId(id);
-        model.addAttribute("rol",deRol);
-        if (deRol.getType().equals("Administrator")) return "redirect:/Administrator/index.html?rolid="+deRol.getId();
-        else if (deRol.getType().equals("Koper")) return "redirect:/koper/index.html?rolid="+deRol.getId();
-        else if (deRol.getType().equals("Teler")) return "redirect:/teler/index.html?rolid="+deRol.getId();
-        else if (deRol.getType().equals("Leverancier")) return "redirect:/Leverancier/aanbiedingLijst.html?rolid="+deRol.getId();
-        return "redirect:/accessDenied.html"+deRol.getId(); // voor de andere rollen
-    }
+//    @RequestMapping(value = {"/rol.html"}, method = RequestMethod.GET)
+//    @PostAuthorize("#model.get('rol').partij.emailadres == authentication.principal.username")
+//    public String indexVoorRol(@RequestParam("id") Integer id, ModelMap model){
+//        Rol deRol = PajottersSessieService.zoekRolMetId(id);
+//        model.addAttribute("rol",deRol);
+//        if (deRol.getType().equals("Administrator"))
+//        	return "redirect:/Administrator/index.html?rolid=" + deRol.getId();
+//        else if (deRol.getType().equals("Koper"))
+//        	return "redirect:/Koper/index.html?rolid=" + deRol.getId();
+//        else if (deRol.getType().equals("Teler"))
+//        	return "redirect:/Teler/index.html?rolid=" + deRol.getId();
+//        else if (deRol.getType().equals("Leverancier"))
+//        	return "redirect:/Leverancier/index.html?rolid=" + deRol.getId();
+//        else if (deRol.getType().equals("Industrie"))
+//        	return "redirect:/Industrie/index.html?rolid=" + deRol.getId();
+//        else if (deRol.getType().equals("Pajotter"))
+//        	return "redirect:/Pajotter/index.html?rolid=" + deRol.getId();
+//        return "redirect:/accessDenied.html" + deRol.getId(); // voor de andere rollen
+//    }
     // je zal gaan naar de pagina conform uw rol
 }

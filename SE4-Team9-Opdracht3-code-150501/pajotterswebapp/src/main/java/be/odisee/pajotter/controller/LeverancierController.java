@@ -17,14 +17,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/Leverancier")
 public class LeverancierController {
 	@Autowired
     protected PajottersSessieService pajottersSessieService = null;
 	  @Autowired
 	    protected UserContextService userContextService=null;
 	
-	@RequestMapping(value={"/Leverancier/index.html"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/jquery.js","/jquery"}, method = RequestMethod.GET)
+    public String jquery(ModelMap model){
+    	return "js/jquery-2.1.3.min.js";
+    }
+    @RequestMapping(value={"/opmaak.css","/opmaak"}, method = RequestMethod.GET)
+    public String opmaak(ModelMap model){
+    	return "css/Opmaak.css";
+    }
+	
+	@RequestMapping(value={"/index.html"}, method = RequestMethod.GET)
     public String index(ModelMap model){
 		Partij partij = userContextService.getAuthenticatedPersoon();
         List<Aanbieding> deLijst = pajottersSessieService.geefAlleAanbiedingen(partij.getId());
@@ -33,7 +42,7 @@ public class LeverancierController {
     }
 	
     //lijst van alle aanbieding
-    @RequestMapping(value={"/Leverancier/aanbiedingLijst.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/aanbiedingLijst.html"}, method = RequestMethod.GET)
     public String Lijst(ModelMap model){
     	Partij partij = userContextService.getAuthenticatedPersoon();
         List<Aanbieding> deLijst = pajottersSessieService.geefAlleAanbiedingen(partij.getId());
@@ -52,7 +61,7 @@ public class LeverancierController {
     //HIER NOG VAN BESTELLINGEN!!
     
     //details van de producite
-    @RequestMapping(value={"/Leverancier/aanbieding.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/aanbieding.html"}, method = RequestMethod.GET)
     public String aanbiedingDetail(@RequestParam("id") Integer id, ModelMap model) {
         Aanbieding aanbieding = pajottersSessieService.zoekAanbiedingMetId(id);
         model.addAttribute("aanbieding", aanbieding);
@@ -60,7 +69,7 @@ public class LeverancierController {
     }
     
     //om een aanbieding toe te voegen
-    @RequestMapping(value={"/Leverancier/nieuweAanbieding.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/nieuweAanbieding.html"}, method = RequestMethod.GET)
     public String aanbiedingFormulier(ModelMap model) {
         Aanbieding aanbieding = new Aanbieding();
         model.addAttribute("deaanbieding", aanbieding);
@@ -68,7 +77,7 @@ public class LeverancierController {
     }
     
     //om de aanbieding te verwijderen
-    @RequestMapping(value={"/Leverancier/verwijderAanbieding.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/verwijderAanbieding.html"}, method = RequestMethod.GET)
     public String aanbiedingDelete(@RequestParam("id") Integer id, ModelMap model) {
         pajottersSessieService.verwijderAanbieding(id);
         Partij partij = userContextService.getAuthenticatedPersoon();
@@ -78,7 +87,7 @@ public class LeverancierController {
     }
     
     //om de aanbieding up te daten
-    @RequestMapping(value={"/Leverancier/updateAanbieding.html"}, method = RequestMethod.POST)
+    @RequestMapping(value={"/updateAanbieding.html"}, method = RequestMethod.POST)
     public String aanbiedingUpdate(@ModelAttribute("deaanbieding") @Valid Aanbieding aanbieding, BindingResult result, ModelMap model){
     	pajottersSessieService.updateAanbieding(aanbieding);
         model.addAttribute("aanbieding", aanbieding);
@@ -86,7 +95,7 @@ public class LeverancierController {
     }
     
     //om naar de update pagina te gaan en de aanbieding info mee te geven
-    @RequestMapping(value={"/Leverancier/updateAanbieding.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/updateAanbieding.html"}, method = RequestMethod.GET)
     public String telerEditpagina(@RequestParam("id") Integer id, ModelMap model) {
     	Aanbieding aanbieding = pajottersSessieService.zoekAanbiedingMetId(id);
         model.addAttribute("deaanbieding", aanbieding);
@@ -94,7 +103,7 @@ public class LeverancierController {
     }
     
     //nieuwe aanbieding te maken
-    @RequestMapping(value={"/Leverancier/nieuweAanbieding.html"}, method = RequestMethod.POST)
+    @RequestMapping(value={"/nieuweAanbieding.html"}, method = RequestMethod.POST)
     public String producteiToevoegen(@ModelAttribute("deaanbieding") @Valid Aanbieding aanbieding, BindingResult result, ModelMap model, @RequestParam int PartijId){
     	if (result.hasErrors()) return "/Leverancier/nieuweAanbieding"; 
     	Partij partijDatVerzend = userContextService.getAuthenticatedPersoon();

@@ -20,7 +20,6 @@ public class PartijHibernateDao extends HibernateDao implements PartijDao {
         try {
 			partij.voegRolToe(rol, status, emailadres);
 		} catch (RolNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         sessionSaveObject(partij);
@@ -33,10 +32,16 @@ public class PartijHibernateDao extends HibernateDao implements PartijDao {
     }
 
     public Partij savePartij(int id, String status, String voornaam, String familienaam, String emailadres, String paswoord) {
-    	Partij partij = new Partij(id,status, voornaam, familienaam, emailadres, paswoord);
+    	Partij partij = new Partij(id, status, voornaam, familienaam, emailadres, paswoord);
         sessionSaveObject(partij);
         return partij;
 	}
+    
+    public Partij savePartij(Partij partij) {
+    	Partij npartij = new Partij(partij.getStatus(), partij.getVoornaam(), partij.getFamilienaam(), partij.getEmailadres(), partij.getPaswoord());
+    	sessionSaveObject(npartij);
+    	return npartij;
+    }
     
     public Partij getPartijById(int partijId) {
         return (Partij) sessionGetObjectById("Partij", partijId);

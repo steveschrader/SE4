@@ -3,11 +3,8 @@ package be.odisee.pajotter.controller;
 import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.service.*;
 import be.odisee.pajotter.utilities.RolNotFoundException;
-
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,14 +12,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/Teler")
 public class TelerController {
+	
 	@Autowired
     protected PajottersSessieService pajottersSessieService = null;
-  @Autowired
-    protected UserContextService userContextService=null;
+	@Autowired
+	protected UserContextService userContextService = null;
 	
-	@RequestMapping(value={"/Teler/index.html"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/index.html"}, method = RequestMethod.GET)
     public String Keuze(ModelMap model){
 		Partij partij = userContextService.getAuthenticatedPersoon();
         List<Productie> deLijst = pajottersSessieService.geefAlleProductie(partij.getId());
@@ -30,7 +28,7 @@ public class TelerController {
         return "/Teler/index";
     }
     //lijst van alle productie
-    @RequestMapping(value={"/Teler/productieLijst.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/productieLijst.html"}, method = RequestMethod.GET)
     public String indexProductie(ModelMap model){
 		Partij partij = userContextService.getAuthenticatedPersoon();
         List<Productie> deLijst = pajottersSessieService.geefAlleProductie(partij.getId());
@@ -39,7 +37,7 @@ public class TelerController {
     }
     
     //details van de producite
-    @RequestMapping(value={"/Teler/productie.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/productie.html"}, method = RequestMethod.GET)
     public String productieDetail(@RequestParam("id") Integer id, ModelMap model) {
         Productie productie = pajottersSessieService.zoekProductieMetId(id);
         model.addAttribute("productie", productie);
@@ -47,7 +45,7 @@ public class TelerController {
     }
     
     //om een productie toe te voegen
-    @RequestMapping(value={"/Teler/nieuweProductie.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/nieuweProductie.html"}, method = RequestMethod.GET)
     public String productieFormulier(ModelMap model) {
         Productie productie = new Productie();
         model.addAttribute("deproductie", productie);
@@ -55,7 +53,7 @@ public class TelerController {
     }
     
     //om de productie te verwijderen
-    @RequestMapping(value={"/Teler/verwijderProductie.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/verwijderProductie.html"}, method = RequestMethod.GET)
     public String productieDelete(@RequestParam("id") Integer id, ModelMap model) {
         pajottersSessieService.verwijderProductie(id);
 		Partij partij = userContextService.getAuthenticatedPersoon();
@@ -65,7 +63,7 @@ public class TelerController {
     }
     
     //om de productie up te daten
-    @RequestMapping(value={"/Teler/updateProductie.html"}, method = RequestMethod.POST)
+    @RequestMapping(value={"/updateProductie.html"}, method = RequestMethod.POST)
     public String productieUpdate(@ModelAttribute("deproductie") @Valid Productie productie, BindingResult result, ModelMap model){
     	pajottersSessieService.updateProductie(productie);
         model.addAttribute("productie", productie);
@@ -73,7 +71,7 @@ public class TelerController {
     }
     
     //om naar de update pagina te gaan en de productie info mee te geven
-    @RequestMapping(value={"/Teler/updateProductie.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/updateProductie.html"}, method = RequestMethod.GET)
     public String telerEditpagina(@RequestParam("id") Integer id, ModelMap model) {
     	Productie productie = pajottersSessieService.zoekProductieMetId(id);
         model.addAttribute("deproductie", productie);
@@ -81,10 +79,10 @@ public class TelerController {
     }
     
     //nieuwe productie te maken
-    @RequestMapping(value={"/Teler/nieuweProductie.html"}, method = RequestMethod.POST)
+    @RequestMapping(value={"/nieuweProductie.html"}, method = RequestMethod.POST)
     public String producteiToevoegen(@ModelAttribute("deproductie") @Valid Productie productie, BindingResult result, ModelMap model, @RequestParam int PartijId){
     	if (result.hasErrors()) return "/Teler/nieuweProductie"; 
-    	Partij partijDatVerzend = userContextService.getAuthenticatedPersoon();
+    	Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
     	Productie toegevoegdProductie = pajottersSessieService.VoegProductieToe("actief",partijDatVerzend, productie.getTekst(), productie.getAantal());
         System.out.println("DEBUG ProductieGegevens Tekstst: " + productie.getTekst() );
         return "redirect:/Teler/productie.html?id=" + toegevoegdProductie.getId();
@@ -93,7 +91,7 @@ public class TelerController {
     //---------------------------------------------BESTELLING-----------------------------------------------------------------
     
     //lijst van alle bestelling
-    @RequestMapping(value={"/Teler/bestellingLijst.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/bestellingLijst.html"}, method = RequestMethod.GET)
     public String indexBestelling(ModelMap model){
     	Partij partij = userContextService.getAuthenticatedPersoon();
         List<Bestelling> deLijst = pajottersSessieService.geefAlleBestellingen(partij.getId(), "partij_id");
@@ -102,7 +100,7 @@ public class TelerController {
     }
     
     //details van de producite
-    @RequestMapping(value={"/Teler/bestelling.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/bestelling.html"}, method = RequestMethod.GET)
     public String bestellingDetail(@RequestParam("id") Integer id, ModelMap model) {
         Bestelling bestelling = pajottersSessieService.zoekBestellingMetId(id);
         model.addAttribute("bestelling", bestelling);
@@ -110,7 +108,7 @@ public class TelerController {
     }
     
     //om een bestelling toe te voegen
-    @RequestMapping(value={"/Teler/nieuweBestelling.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/nieuweBestelling.html"}, method = RequestMethod.GET)
     public String bestellingFormulier(ModelMap model) {
         Bestelling bestelling = new Bestelling();
         model.addAttribute("debestelling", bestelling);
@@ -118,7 +116,7 @@ public class TelerController {
     }
     
     //om de bestelling te verwijderen
-    @RequestMapping(value={"/Teler/verwijderBestelling.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/verwijderBestelling.html"}, method = RequestMethod.GET)
     public String bestellingDelete(@RequestParam("id") Integer id, ModelMap model) {
         pajottersSessieService.verwijderBestelling(id);
     	Partij partij = userContextService.getAuthenticatedPersoon();
@@ -128,7 +126,7 @@ public class TelerController {
     }
     
     //om de bestelling up te daten
-    @RequestMapping(value={"/Teler/updateBestelling.html"}, method = RequestMethod.POST)
+    @RequestMapping(value={"/updateBestelling.html"}, method = RequestMethod.POST)
     public String bestellingUpdate(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model){
     	pajottersSessieService.updateBestelling(bestelling);
         model.addAttribute("bestelling", bestelling);
@@ -136,7 +134,7 @@ public class TelerController {
     }
     
     //om naar de update pagina te gaan en de bestelling info mee te geven
-    @RequestMapping(value={"/Teler/updateBestelling.html"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/updateBestelling.html"}, method = RequestMethod.GET)
     public String bestellingEditpagina(@RequestParam("id") Integer id, ModelMap model) {
     	Bestelling bestelling = pajottersSessieService.zoekBestellingMetId(id);
         model.addAttribute("debestelling", bestelling);
@@ -144,8 +142,8 @@ public class TelerController {
     }
     
     //nieuwe bestelling te maken
-    @RequestMapping(value={"/Teler/nieuweBestelling.html"}, method = RequestMethod.POST)
-    public String producteiToevoegen(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model){
+    @RequestMapping(value={"/nieuweBestelling.html"}, method = RequestMethod.POST)
+    public String producteiToevoegen(@ModelAttribute("debestelling") @Valid Bestelling bestelling, BindingResult result, ModelMap model, @RequestParam int PartijId){
     	if (result.hasErrors()) return "/Teler/nieuweBestelling"; 
     	//Partij partijDatVerzend = pajottersSessieService.zoekPartijMetId(PartijId);
     	Partij partijDatVerzend = userContextService.getAuthenticatedPersoon();

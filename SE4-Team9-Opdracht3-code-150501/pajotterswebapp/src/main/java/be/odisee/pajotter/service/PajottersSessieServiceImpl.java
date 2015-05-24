@@ -60,15 +60,18 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
     
     //PARTIJEN
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-	public Partij voegPartijToe(String voornaam, String familienaam,
-			String emailadres, String paswoord) {
+	public Partij voegPartijToe(String voornaam, String familienaam, String emailadres, String paswoord) {
 		return partijDao.savePartij("actief", voornaam, familienaam, emailadres, paswoord);	
 	}
     
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-
 	public Partij voegPartijToe(String voornaam, String familienaam, String emailadres, String paswoord, String rol) {
 		return partijDao.savePartij("actief", voornaam, familienaam, emailadres, paswoord, rol);	
+	}
+    
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+	public Partij voegPartijToe(Partij partij) {
+		return partijDao.savePartij(partij);
 	}
 
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
@@ -78,8 +81,12 @@ public class PajottersSessieServiceImpl implements PajottersSessieService {
 
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
 	public void verwijderPartij(int partijid) {
+    	//Eerst alle rollen zoeken waar deze partij in zit en dan de partij verwijderen
+    	Rol rol = zoekRolMetId(partijid);
+    	System.out.println("de rol met username wordt verwijderd: " + rol.getUsernaam());
+    	rolDao.deleteRol(rol.getId());
+    	System.out.println("Partij met id wordt verwijderd: " + partijid);
 		partijDao.deletePartij(partijid);
-		
 	}
 
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)

@@ -11,6 +11,8 @@ public interface PartijDao {
     public Partij savePartij(String status, String voornaam, String familienaam, String emailadres, String paswoord);
 
     public Partij savePartij(String status, String voornaam, String familienaam, String emailadres, String paswoord, String rol);
+    
+    public Partij savePartij(Partij partij);
 
     public Partij getPartijById(int partijId);
 

@@ -3,31 +3,48 @@ package be.odisee.pajotter.controller;
 import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.service.PajottersSessieService;
 import be.odisee.pajotter.utilities.RolNotFoundException;
+
 import java.util.List;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-//@RequestMapping("/Partij")
+@RequestMapping("/Administrator")
 public class AdministratorController {
 	
 	@Autowired
     protected PajottersSessieService pajottersSessieService = null;
 	
-    //lijst van alle partijen
-    @RequestMapping(value={"/Administrator/home.html","/Administrator/index.html","/Administrator/lijst.html"}, method = RequestMethod.GET)
-    public String index(ModelMap model){
-        List<Partij> deLijst = pajottersSessieService.geefAllePartijen();
-        model.addAttribute("partijen", deLijst);
+	@RequestMapping(value = {"/jquery.js","/jquery"}, method = RequestMethod.GET)
+    public String jquery(ModelMap model) {
+    	return "js/jquery-2.1.3.min.js";
+    }
+    @RequestMapping(value = {"/opmaak.css","/opmaak"}, method = RequestMethod.GET)
+    public String opmaak(ModelMap model) {
+    	return "css/Opmaak.css";
+    }
+	
+    //Lijst van alle partijen, meteen op het hoofdsherm
+    @RequestMapping(value = {"/home.html", "/home", "/index.html", "/index", "/lijst.html", "/lijst"}, method = RequestMethod.GET)
+    //@PostAuthorize("#model.get('rol').partij.emailadres == authentication.principal.username")
+    public String index(/*@RequestParam("rolid") Integer id,*/ ModelMap model) {
+    	//Rol rolAuth = pajottersSessieService.zoekRolMetId(id);
+    	//model.addAttribute("rol", rolAuth);
+        List<Partij> partijlijst = pajottersSessieService.geefAllePartijen();
+        model.addAttribute("partijen", partijlijst);
         return "/Administrator/index";
     }
     
-    //details van de partij
-    @RequestMapping(value={"/Administrator/partij.html"}, method = RequestMethod.GET)
+    //Geef details van de geselecteerde partij op basis van zijn id
+    @RequestMapping(value = {"/partij.html", "/partij"}, method = RequestMethod.GET)
     public String partijDetail(@RequestParam("id") Integer id, ModelMap model) {
     	Partij partij = pajottersSessieService.zoekPartijMetId(id);
     	Rol rol = pajottersSessieService.zoekRolMetId(id);
@@ -36,43 +53,56 @@ public class AdministratorController {
         return "/Administrator/partij";
     }
     
-    //om een teler toe te voegen
-    @RequestMapping(value={"/Administrator/nieuwePartij.html"}, method = RequestMethod.GET)
-    public String partijFormulier(ModelMap model){
-    	Rol rol = new Rol() {
-			
-			@Override
-			public String getType() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
+    //Om een partij toe te voegen roepen we de juiste jsp op met een lege partij en rol
+    @RequestMapping(value = {"/nieuwePartij.html", "/nieuwePartij"}, method = RequestMethod.GET)
+    public String partijFormulier(ModelMap model) {
+    	String rolnaam = new String();
         Partij partij = new Partij();
-        model.addAttribute("departij", partij);
-        model.addAttribute("derol", rol);
+        PartijWrapperVoorForm partijwrapper = new PartijWrapperVoorForm(partij, rolnaam);
+        model.addAttribute("departij", partijwrapper);
         return "/Administrator/nieuwePartij";
     }
     
-    //om de teler te verwijderen
-    @RequestMapping(value={"/Administrator/verwijderPartij.html"}, method = RequestMethod.GET)
-    public String partijDelete(@RequestParam("id") Integer id, ModelMap model){
+    //Om een nieuwe partij te maken, de ingevulde partij krijgen we binnen en persisteren 
+    @RequestMapping(value = {"/nieuwePartij.html", "/nieuwePartij"}, method = RequestMethod.POST)
+    public String partijToevoegen(@ModelAttribute("departij") @Valid PartijWrapperVoorForm partij, BindingResult result, ModelMap model) {
+    	if (result.hasErrors()) return "/Administrator/nieuwePartij";
+        
+		try {
+			Partij toegevoegdPartij = pajottersSessieService.voegPartijToe(partij.getPartij());
+			Rol nieuweRol = pajottersSessieService.voegRolToe(partij.getRol(), toegevoegdPartij.getId(), partij.getPartij().getEmailadres());
+			System.out.println("DEBUG Partij toegevoegd met familienaam: " + partij.getPartij().getFamilienaam() + " rol:" + partij.getRol());
+	        return "redirect:/Administrator/partij.html?id=" + toegevoegdPartij.getId();
+		}
+		catch (RolNotFoundException e) {
+			System.out.println("Probleem bij het toevoegen van een partij!!!");
+		}
+		List<Partij> deLijst = pajottersSessieService.geefAllePartijen();
+        model.addAttribute("partijen", deLijst);
+        return "redirect:/Administrator/index";
+    }
+    
+    //Om de partij te verwijderen
+    @RequestMapping(value = {"/verwijderPartij.html", "/verwijderPartij"}, method = RequestMethod.GET)
+    public String partijDelete(@RequestParam("id") Integer id, ModelMap model) {
         pajottersSessieService.verwijderPartij(id);
         List<Partij> deLijst = pajottersSessieService.geefAllePartijen();
         model.addAttribute("partijen", deLijst);
         return "/Administrator/index";
     }
     
-    //om de teler up te daten
-    @RequestMapping(value={"/Administrator/updatePartij.html"}, method = RequestMethod.POST)
-    public String telerUpdate(@ModelAttribute("departij") @Valid Partij partij, BindingResult result, ModelMap model, @RequestParam String rol){
+    //Om de partij up te daten
+    @RequestMapping(value = {"/updatePartij.html", "/updatePartij", "/editPartij.html", "/editPartij"}, method = RequestMethod.POST)
+    public String telerUpdate(@ModelAttribute("departij") @Valid Partij partij, BindingResult result, ModelMap model, @RequestParam String rol) {
     	if (result.hasErrors()) return "/editPartij"; 
+    	
     	pajottersSessieService.verwijderRol(partij.getId());
     	pajottersSessieService.updatePartij(partij);
+    	
     	try {
 			pajottersSessieService.voegRolToe(rol, partij.getId(), partij.getEmailadres());
 		}
     	catch (RolNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
@@ -83,35 +113,13 @@ public class AdministratorController {
         return "/Administrator/partij";
     }
     
-    //om naar de update pagina te gaan en de teler info mee te geven
-    @RequestMapping(value={"/Administrator/updatePartij.html"}, method = RequestMethod.GET)
+    //Om naar de update pagina te gaan en de partij info mee te geven
+    @RequestMapping(value = {"/updatePartij.html", "/updatePartij", "/editPartij", "/editPartij.html"}, method = RequestMethod.GET)
     public String telerEditpagina(@RequestParam("id") Integer id, ModelMap model){
     	Partij partij = pajottersSessieService.zoekPartijMetId(id);
     	Rol rol = pajottersSessieService.zoekRolMetId(id);
         model.addAttribute("departij", partij);
         model.addAttribute("rol", rol);
         return "/Administrator/editPartij";
-    }
-    
-    // nieuwe teler te maken
-    @RequestMapping(value={"/Administrator/nieuwePartij.html"}, method = RequestMethod.POST)
-    public String partijToevoegen(@ModelAttribute("departij") @Valid Partij partij, BindingResult result, ModelMap model, @RequestParam String rol){
-    	if (result.hasErrors()) return "/Administrator/nieuwePartij"; 
-    	//Partij toegevoegdPartij = pajottersSessieService.voegPartijToe(partij.getVoornaam(), partij.getFamilienaam(), partij.getEmailadres(), partij.getPaswoord());
-    	//Rol toegevoegdRol = pajottersSessieService.voegRolToe()
-    	Partij toegevoegdPartij = null;
-        
-		try {
-			toegevoegdPartij = pajottersSessieService.voegPartijToe(partij.getVoornaam(), partij.getFamilienaam(), partij.getEmailadres(), partij.getPaswoord());
-			Rol nieuweRol = pajottersSessieService.voegRolToe(rol, toegevoegdPartij.getId(), partij.getEmailadres());
-			//pajottersSessieService.voegRolToe("pajotter", toegevoegdPartij.getId(), partij.getEmailadres());
-		}
-		catch (RolNotFoundException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-			System.out.println("probleem hier!!!");
-		}
-        System.out.println("DEBUG partijgegevens familienaam: " + partij.getFamilienaam() +" rol:"+ rol);
-        return "redirect:/Administrator/partij.html?id=" + toegevoegdPartij.getId();
     }
 }
