@@ -48,11 +48,12 @@ h1 {
 }
 
 h2 {
-	padding: 0;
+	padding: 0 0 0.2em 0;
 	margin: 1em 0 0.6em 0;
 	font-family: Arial, sans-serif;
 	font-weight: normal;
 	font-size: 200%;
+	border-bottom: 1px solid rgb(60,60,60);
 }
 
 p {
@@ -67,13 +68,15 @@ p {
 	display: block;
 }
 
-.opdracht {
+.opdracht, .inleiding {
 	font-style: italic;
 	font-weight: bold;
 }
 
 .knoppenpaneel {
 	margin-top: 2em;
+	overflow: hidden;
+	margin-bottom: 2em;
 }
 
 .knop {
@@ -90,6 +93,7 @@ p {
 	font-size: inherit;
 	font-weight: bold;
 	margin-right: 0.3em;
+	float: left;
 }
 
 .knop:hover, .knop:focus {
@@ -99,4 +103,36 @@ p {
 
 label {
 	font-weight: bold;
+}
+
+errortekst {
+	color: red;
+	font-weight: bold;
+}
+
+ul {
+	list-style: none;
+	/*border: 3px solid #00FFFF;*/
+	background-color: #EEFFFF;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	margin: 0;
+	border-bottom: 1px solid #00FFFF;
+}
+
+a {
+	
+}
+a:hover, a:focus {
+	background-color: #DDEEEE;
+}
+
+li a {
+	padding: 0.5em;
+	text-decoration: none;
+	color: inherit;
+	display: block;
 }

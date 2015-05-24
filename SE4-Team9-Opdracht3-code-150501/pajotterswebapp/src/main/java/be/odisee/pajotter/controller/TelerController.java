@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/Teler")
 public class TelerController {
+	
 	@Autowired
     protected PajottersSessieService pajottersSessieService = null;
+	@Autowired
+	protected UserContextService userContextService = null;
 	
 	@RequestMapping(value={"/index.html"}, method = RequestMethod.GET)
     public String Keuze(ModelMap model){

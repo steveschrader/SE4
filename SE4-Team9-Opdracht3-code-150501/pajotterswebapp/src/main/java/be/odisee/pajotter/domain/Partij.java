@@ -1,13 +1,17 @@
 package be.odisee.pajotter.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+
 import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+
 import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.utilities.RolNotFoundException;
 
@@ -122,15 +126,28 @@ public class Partij implements Serializable {
     public void setVoornaam(String voornaam) {
         this.voornaam = voornaam;
     }
-
+    
+    public String getTypes() {
+    	String types = new String();
+    	Rol[] rollen = m_Rollen.toArray(new Rol[m_Rollen.size()]);
+    	
+    	for (int i = 0; i < rollen.length; i++)
+    	{
+    		types += rollen[i].getType() + ", ";
+    	}
+    	int vermindering = 2;
+    	if (types.length() <= 1) vermindering = 0;
+    	return types.substring(0, types.length() - vermindering);
+    }
+    
     public Rol voegRolToe(String type, String status, String usernaam) throws RolNotFoundException{
         Rol newRol = null;
-        if (type.toLowerCase().equals("Administrator")) newRol = new Administrator(status, usernaam, this);
-        if (type.toLowerCase().equals("Teler")) newRol = new Teler(status, usernaam, this);
-        if (type.toLowerCase().equals("Pajotter")) newRol = new Pajotter(status, usernaam, this);
-        if (type.toLowerCase().equals("Leverancier")) newRol = new Leverancier(status, usernaam, this);
-        if (type.toLowerCase().equals("Industrie")) newRol = new Industrie(status, usernaam, this);
-        if (type.toLowerCase().equals("Koper")) newRol = new Koper(status, usernaam, this);
+        if (type.toLowerCase().equals("administrator")) newRol = new Administrator(status, usernaam, this);
+        if (type.toLowerCase().equals("teler")) newRol = new Teler(status, usernaam, this);
+        if (type.toLowerCase().equals("pajotter")) newRol = new Pajotter(status, usernaam, this);
+        if (type.toLowerCase().equals("leverancier")) newRol = new Leverancier(status, usernaam, this);
+        if (type.toLowerCase().equals("industrie")) newRol = new Industrie(status, usernaam, this);
+        if (type.toLowerCase().equals("koper")) newRol = new Koper(status, usernaam, this);
         if (newRol==null) throw new RolNotFoundException("Type '" + type + "' is geen bekende Rol.");
         m_Rollen.add(newRol);
         return newRol;

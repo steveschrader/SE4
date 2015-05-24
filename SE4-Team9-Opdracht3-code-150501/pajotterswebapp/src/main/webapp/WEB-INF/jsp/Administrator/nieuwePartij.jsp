@@ -1,11 +1,11 @@
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Nieuwe teler - Pajottersapplicatie</title>
-        <link href=opmaak.css rel="stylesheet"/>
+        <link href=opmaak.css rel="stylesheet" type="text/css"/>
     </head>
     
     <body>
@@ -19,24 +19,24 @@
 				<p>Vul de het onderstaande formulier in om een nieuwe teler aan te maken.</p>
 		        <c:url var="url" value="/Administrator/nieuwePartij.html">
 		        </c:url>
-		        <form:form action="${url}" commandName="departij">   <%-- Spring form tags --%>
+		        <form:form action="${url}" modelAttribute="departij">   <%-- Spring form tags --%>
 			            <table>
 				            <tbody>
 				            	<tr>
-				            		<td><label for="vnaam">Voornaam:</label></td> <td><form:input id="vnaam" path="voornaam"/></td>
-				            		<td><font color="red"><form:errors path="voornaam" /></font></td>
+				            		<td><label for="vnaam">Voornaam:</label></td> <td><form:input id="vnaam" path="partij.voornaam"/></td>
+				            		<td><font color="red"><form:errors path="partij.voornaam" /></font></td>
 				            	</tr>
 				            	<tr>
-				            		<td><label for="fnaam">Familienaam:</label></td> <td><form:input id="fnaam" path="familienaam"/></td>
-				            		<td><font color="red"><form:errors path="familienaam" /></font></td>
+				            		<td><label for="fnaam">Familienaam:</label></td> <td><form:input id="fnaam" path="partij.familienaam"/></td>
+				            		<td><font color="red"><form:errors path="partij.familienaam" /></font></td>
 				            	</tr>
 				            	<tr>
-				            		<td><label for="email">E-mailadres:</label></td> <td><form:input id="email" path="emailadres"/></td>
-				            		<td><font color="red"><form:errors path="emailadres" /></font></td>
+				            		<td><label for="email">E-mailadres:</label></td> <td><form:input id="email" path="partij.emailadres"/></td>
+				            		<td><font color="red"><form:errors path="partij.emailadres" /></font></td>
 				            	</tr>
 				            	<tr>
-				            		<td><label for="pwoord">Paswoord:</label></td> <td><form:input id="pwoord" path="paswoord"/></td>
-				            		<td><font color="red"><form:errors path="paswoord" /></font></td>
+				            		<td><label for="pwoord">Paswoord:</label></td> <td><form:input id="pwoord" path="partij.paswoord"/></td>
+				            		<td><font color="red"><form:errors path="partij.paswoord" /></font></td>
 				            	</tr>
 				            	
 				            	<tr>
@@ -44,12 +44,12 @@
    									
 
    									<td>
-	   									<form:select id="rol" path="" name="rol">
-										  <option value="Industrie">Industrie</option>
-										  <option value="Koper">Koper</option>
-										  <option value="Leverancier">Leverancier</option>
-										  <option value="Pajotter">Pajotter</option>
-										  <option value="Teler">Teler</option>
+	   									<form:select id="rol" path="rol" name="rol">
+										  <form:option value="Industrie">Industrie</form:option>
+										  <form:option value="Koper">Koper</form:option>
+										  <form:option value="Leverancier">Leverancier</form:option>
+										  <form:option value="Pajotter">Pajotter</form:option>
+										  <form:option value="Teler">Teler</form:option>
 										</form:select>
 									</td>
 									

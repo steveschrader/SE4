@@ -151,6 +151,7 @@ public class HibernateDao {
     protected void sessionDeleteObject(Object o) {
         try {
             sessionFactory.getCurrentSession().delete(o);
+            //sessionFactory.getCurrentSession().flush();
         }
         catch (Exception e) {
             e.printStackTrace();

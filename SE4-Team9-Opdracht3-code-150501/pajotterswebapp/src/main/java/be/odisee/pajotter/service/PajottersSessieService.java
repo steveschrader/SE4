@@ -13,6 +13,8 @@ public interface PajottersSessieService {
     
     public Partij voegPartijToe(String voornaam, String familienaam, String emailadres, String paswoord);
     
+    public Partij voegPartijToe(Partij partij);
+    
     public Partij zoekPartijMetId(int id);
     
     public void verwijderPartij(int partijid);

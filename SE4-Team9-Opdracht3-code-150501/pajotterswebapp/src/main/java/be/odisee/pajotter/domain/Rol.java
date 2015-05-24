@@ -1,8 +1,11 @@
 package be.odisee.pajotter.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import org.hibernate.annotations.Index;
+
 import be.odisee.pajotter.domain.*;
 
 @Entity
