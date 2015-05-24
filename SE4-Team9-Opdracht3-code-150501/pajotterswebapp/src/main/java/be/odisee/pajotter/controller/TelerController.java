@@ -3,8 +3,11 @@ package be.odisee.pajotter.controller;
 import be.odisee.pajotter.domain.*;
 import be.odisee.pajotter.service.*;
 import be.odisee.pajotter.utilities.RolNotFoundException;
+
 import java.util.List;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -167,6 +170,8 @@ public class TelerController {
     @RequestMapping(value={"/vraag.html"}, method = RequestMethod.GET)
     public String vraagDetail(@RequestParam("id") Integer id, ModelMap model) {
         Vraag vraag = pajottersSessieService.zoekVraagMetId(id);
+        Antwoord antwoord = pajottersSessieService.zoekAntwoordMetId(vraag.getId());
+        model.addAttribute("antwoord", antwoord);
         model.addAttribute("vraag", vraag);
         return "/Teler/vraag";
     }

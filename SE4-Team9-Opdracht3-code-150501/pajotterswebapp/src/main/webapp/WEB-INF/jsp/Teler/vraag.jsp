@@ -24,7 +24,7 @@
 		        	</tr>
 		        	<tr>
 		        		<td><b>Antwoord:</b></td>
-		        		<td><c:out value=""/></td>
+		        		<td><c:out value="${antwoord.tekst}"/></td>
 		        	</tr>
 		        	
 		        	
